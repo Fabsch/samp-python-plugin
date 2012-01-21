@@ -1,0 +1,8 @@
+LIBRARY	"PythonPlugin"
+EXPORTS
+	Supports
+	Load
+	Unload
+	AmxLoad
+	AmxUnload
+	ProcessTick

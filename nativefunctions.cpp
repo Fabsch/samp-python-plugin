@@ -1423,13 +1423,13 @@ PyObject *sGetAnimationName(PyObject *self, PyObject *args)
 
 	return retval;
 }
-// int GetMaxPlayers() -- TODO: test
+// int GetMaxPlayers()
 PyObject *sGetMaxPlayers(PyObject *self, PyObject *args)
 {
 	cell amxargs[1] = { 0 };
 	return Py_BuildValue("i", _getMaxPlayers(m_AMX, amxargs));
 }
-// GetNetworkStats(retstr[], retstr_size) -- TODO: test
+// GetNetworkStats(retstr[], retstr_size)
 PyObject *sGetNetworkStats(PyObject *self, PyObject *args)
 {
 	cell *strretstr;
@@ -1509,7 +1509,7 @@ PyObject *sGetPlayerAnimationIndex(PyObject *self, PyObject *args)
 
 	return Py_BuildValue("i", _getPlayerAnimationIndex(m_AMX, amxargs));
 }
-// GetPlayerArmour(playerid, Float:&armour) -- TODO: test
+// GetPlayerArmour(playerid, Float:&armour)
 PyObject *sGetPlayerArmour(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1524,7 +1524,7 @@ PyObject *sGetPlayerArmour(PyObject *self, PyObject *args)
 	amx_Release(m_AMX, amxargs[2]);
 	return Py_BuildValue("f", arm);
 }
-// GetPlayerCameraFrontVector(playerid, &Float:x, &Float:y, &Float:z) -- TODO: test
+// GetPlayerCameraFrontVector(playerid, &Float:x, &Float:y, &Float:z)
 PyObject *sGetPlayerCameraFrontVector(PyObject *self, PyObject *args)
 {
 	int playerid;
@@ -1553,7 +1553,7 @@ PyObject *sGetPlayerCameraMode(PyObject *self, PyObject *args)
 
 	return Py_BuildValue("i", _getPlayerCameraMode(m_AMX, amxargs));
 }
-// GetPlayerCameraPos(playerid, Float:&x, Float:&y, Float:&z) -- TODO: test
+// GetPlayerCameraPos(playerid, Float:&x, Float:&y, Float:&z)
 PyObject *sGetPlayerCameraPos(PyObject *self, PyObject *args)
 {
 	int playerid;
@@ -1573,7 +1573,7 @@ PyObject *sGetPlayerCameraPos(PyObject *self, PyObject *args)
 	return Py_BuildValue("{s:f,s:f,s:f}", "x", p[0], "y", p[1], "z", p[2]);
 }
 // GetPlayerCameraUpVector -- removed
-// int GetPlayerColor(playerid) -- TODO: test
+// int GetPlayerColor(playerid)
 PyObject *sGetPlayerColor(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1582,7 +1582,7 @@ PyObject *sGetPlayerColor(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerColor(m_AMX, amxargs));
 }
-// float GetPlayerDistanceFromPoint(playerid, Float:X, Float:Y, Float:Z) -- TODO: test
+// float GetPlayerDistanceFromPoint(playerid, Float:X, Float:Y, Float:Z)
 PyObject *sGetPlayerDistanceFromPoint(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1593,7 +1593,7 @@ PyObject *sGetPlayerDistanceFromPoint(PyObject *self, PyObject *args)
 	cell ret = _getPlayerDistanceFromPoint(m_AMX, amxargs);
 	return Py_BuildValue("f", amx_ctof(ret));
 }
-// int GetPlayerDrunkLevel(playerid) -- TODO: test
+// int GetPlayerDrunkLevel(playerid)
 PyObject *sGetPlayerDrunkLevel(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1602,7 +1602,7 @@ PyObject *sGetPlayerDrunkLevel(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerDrunkLevel(m_AMX, amxargs));
 }
-// GetPlayerFacingAngle(playerid,Float:&Angle) -- TODO: test
+// GetPlayerFacingAngle(playerid,Float:&Angle)
 PyObject *sGetPlayerFacingAngle(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1617,7 +1617,7 @@ PyObject *sGetPlayerFacingAngle(PyObject *self, PyObject *args)
 	amx_Release(m_AMX, amxargs[2]);
 	return Py_BuildValue("f", ang);
 }
-// int GetPlayerFightingStyle(playerid) -- TODO: test
+// int GetPlayerFightingStyle(playerid)
 PyObject *sGetPlayerFightingStyle(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1626,7 +1626,7 @@ PyObject *sGetPlayerFightingStyle(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerFightingStyle(m_AMX, amxargs));
 }
-// GetPlayerHealth(playerid, &health) -- TODO: test
+// GetPlayerHealth(playerid, &health)
 PyObject *sGetPlayerHealth(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1641,7 +1641,7 @@ PyObject *sGetPlayerHealth(PyObject *self, PyObject *args)
 	amx_Release(m_AMX, amxargs[2]);
 	return Py_BuildValue("f", health);
 }
-// int GetPlayerInterior(playerid) -- TODO: test
+// int GetPlayerInterior(playerid)
 PyObject *sGetPlayerInterior(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1671,7 +1671,7 @@ PyObject *sGetPlayerIp(PyObject *self, PyObject *args)
 
 	return retval;
 }
-// GetPlayerKeys(playerid, &keys, &updown, &leftright) -- TODO: test
+// GetPlayerKeys(playerid, &keys, &updown, &leftright)
 PyObject *sGetPlayerKeys(PyObject *self, PyObject *args)
 {
 	int playerid;
@@ -1688,7 +1688,7 @@ PyObject *sGetPlayerKeys(PyObject *self, PyObject *args)
 	int p[3] = { *ref_addr[0], *ref_addr[1], *ref_addr[2] };
 	amx_Release(m_AMX, amxargs[2]); amx_Release(m_AMX, amxargs[3]); amx_Release(m_AMX, amxargs[4]);
 
-	return Py_BuildValue("{s:i,s:i,s:i}", "x", p[0], "y", p[1], "z", p[2]);
+	return Py_BuildValue("{s:i,s:i,s:i}", "keys", p[0], "updown", p[1], "leftright", p[2]);
 }
 // int GetPlayerMenu(playerid) -- TODO: test
 PyObject *sGetPlayerMenu(PyObject *self, PyObject *args)
@@ -1699,7 +1699,7 @@ PyObject *sGetPlayerMenu(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerMenu(m_AMX, amxargs));
 }
-// int GetPlayerMoney(playerid) -- TODO: test
+// int GetPlayerMoney(playerid)
 PyObject *sGetPlayerMoney(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1790,7 +1790,7 @@ PyObject *sGetPlayerObjectRot(PyObject *self, PyObject *args)
 
 	return Py_BuildValue("{s:f,s:f,s:f}", "x", p[0], "y", p[1], "z", p[2]);
 }
-// int GetPlayerPing(playerid) -- TODO: test
+// int GetPlayerPing(playerid)
 PyObject *sGetPlayerPing(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1818,7 +1818,7 @@ PyObject *sGetPlayerPos(PyObject *self, PyObject *args)
 
 	return Py_BuildValue("{s:f,s:f,s:f}", "x", p[0], "y", p[1], "z", p[2]);
 }
-// int GetPlayerScore(playerid) -- TODO: test
+// int GetPlayerScore(playerid)
 PyObject *sGetPlayerScore(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1827,7 +1827,7 @@ PyObject *sGetPlayerScore(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerScore(m_AMX, amxargs));
 }
-// int GetPlayerSkin(playerid) -- TODO: test
+// int GetPlayerSkin(playerid)
 PyObject *sGetPlayerSkin(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1836,7 +1836,7 @@ PyObject *sGetPlayerSkin(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerSkin(m_AMX, amxargs));
 }
-// int GetPlayerSpecialAction(playerid) -- TODO: test
+// int GetPlayerSpecialAction(playerid)
 PyObject *sGetPlayerSpecialAction(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1845,7 +1845,7 @@ PyObject *sGetPlayerSpecialAction(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerSpecialAction(m_AMX, amxargs));
 }
-// int GetPlayerState(playerid) -- TODO: test
+// int GetPlayerState(playerid)
 PyObject *sGetPlayerState(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1872,7 +1872,7 @@ PyObject *sGetPlayerSurfingVehicleID(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerSurfingVehicleID(m_AMX, amxargs));
 }
-// int GetPlayerTargetPlayer(playerid) -- TODO: test
+// int GetPlayerTargetPlayer(playerid)
 PyObject *sGetPlayerTargetPlayer(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1881,7 +1881,7 @@ PyObject *sGetPlayerTargetPlayer(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerTargetPlayer(m_AMX, amxargs));
 }
-// int GetPlayerTeam(playerid) -- TODO: test
+// int GetPlayerTeam(playerid)
 PyObject *sGetPlayerTeam(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1890,7 +1890,7 @@ PyObject *sGetPlayerTeam(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerTeam(m_AMX, amxargs));
 }
-// GetPlayerTime(playerid, &hour, &minute) -- TODO: test
+// GetPlayerTime(playerid, &hour, &minute)
 PyObject *sGetPlayerTime(PyObject *self, PyObject *args)
 {
 	int playerid;
@@ -1903,7 +1903,7 @@ PyObject *sGetPlayerTime(PyObject *self, PyObject *args)
 
 	_getPlayerTime(m_AMX, amxargs);
 
-	float p[2] = { amx_ctof(*ref_addr[0]), amx_ctof(*ref_addr[1]) };
+	int p[2] = { *ref_addr[0], *ref_addr[1] };
 	amx_Release(m_AMX, amxargs[2]); amx_Release(m_AMX, amxargs[3]);
 
 	return Py_BuildValue("{s:i,s:i}", "hour", p[0], "minute", p[1]);
@@ -1926,7 +1926,7 @@ PyObject *sGetPlayerVehicleSeat(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerVehicleSeat(m_AMX, amxargs));
 }
-// GetPlayerVelocity(playerid, &Float:x, &Float:y, &Float:z) -- TODO: test
+// GetPlayerVelocity(playerid, &Float:x, &Float:y, &Float:z)
 PyObject *sGetPlayerVelocity(PyObject *self, PyObject *args)
 {
 	int playerid;
@@ -1945,7 +1945,7 @@ PyObject *sGetPlayerVelocity(PyObject *self, PyObject *args)
 
 	return Py_BuildValue("{s:f,s:f,s:f}", "x", p[0], "y", p[1], "z", p[2]);
 }
-// int GetPlayerVirtualWorld(playerid) -- TODO: test
+// int GetPlayerVirtualWorld(playerid)
 PyObject *sGetPlayerVirtualWorld(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1954,7 +1954,7 @@ PyObject *sGetPlayerVirtualWorld(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerVirtualWorld(m_AMX, amxargs));
 }
-// int GetPlayerWantedLevel(playerid) -- TODO: test
+// int GetPlayerWantedLevel(playerid)
 PyObject *sGetPlayerWantedLevel(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1963,7 +1963,7 @@ PyObject *sGetPlayerWantedLevel(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerWantedLevel(m_AMX, amxargs));
 }
-// int GetPlayerWeapon(playerid) -- TODO: test
+// int GetPlayerWeapon(playerid)
 PyObject *sGetPlayerWeapon(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -1972,7 +1972,7 @@ PyObject *sGetPlayerWeapon(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _getPlayerWeapon(m_AMX, amxargs));
 }
-// GetPlayerWeaponData(playerid, slot, &weapons, &ammo) -- TODO: test
+// GetPlayerWeaponData(playerid, slot, &weapons, &ammo)
 PyObject *sGetPlayerWeaponData(PyObject *self, PyObject *args)
 {
 	int playerid, slot;
@@ -1985,12 +1985,12 @@ PyObject *sGetPlayerWeaponData(PyObject *self, PyObject *args)
 
 	_getPlayerWeaponData(m_AMX, amxargs);
 
-	float p[2] = { amx_ctof(*ref_addr[0]), amx_ctof(*ref_addr[1]) };
+	int p[2] = { *ref_addr[0], *ref_addr[1] };
 	amx_Release(m_AMX, amxargs[3]); amx_Release(m_AMX, amxargs[4]);
 
-	return Py_BuildValue("{s:i,s:i}", "hour", p[0], "minute", p[1]);
+	return Py_BuildValue("{s:i,s:i}", "weapons", p[0], "ammo", p[1]);
 }
-// int GetPlayerWeaponState(playerid) -- TODO: test
+// int GetPlayerWeaponState(playerid)
 PyObject *sGetPlayerWeaponState(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2002,7 +2002,7 @@ PyObject *sGetPlayerWeaponState(PyObject *self, PyObject *args)
 // GetServerVarAsBool -- no
 // GetServerVarAsInt -- no
 // GetServerVarAsString -- no
-// int GetTickCount() -- TODO: test
+// int GetTickCount()
 PyObject *sGetTickCount(PyObject *self, PyObject *args)
 {
 	cell amxargs[1] = { 0 };
@@ -2198,7 +2198,7 @@ PyObject *sGetWeaponName(PyObject *self, PyObject *args)
 // Getdate -- Python has its own date/time functions
 // Getproperty -- no
 // Gettime -- no
-// GivePlayerMoney(playerid, money) -- TODO: test
+// GivePlayerMoney(playerid, money)
 PyObject *sGivePlayerMoney(PyObject *self, PyObject *args)
 {
 	int pid, money;
@@ -2208,7 +2208,7 @@ PyObject *sGivePlayerMoney(PyObject *self, PyObject *args)
 	 _givePlayerMoney(m_AMX, amxargs);
 	 Py_RETURN_NONE;
 }
-// GivePlayerWeapon(playerid, weaponid, ammo) -- TODO: test
+// GivePlayerWeapon(playerid, weaponid, ammo)
 PyObject *sGivePlayerWeapon(PyObject *self, PyObject *args)
 {
 	int pid, wid, ammo;
@@ -2240,7 +2240,7 @@ PyObject *sIsObjectMoving(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), oid };
 	return Py_BuildValue("i", _isObjectMoving(m_AMX, amxargs));
 }
-// int IsPlayerAdmin(playerid) -- TODO: test
+// int IsPlayerAdmin(playerid)
 PyObject *sIsPlayerAdmin(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2258,7 +2258,7 @@ PyObject *sIsPlayerAttachedObjectSlotUsed(PyObject *self, PyObject *args)
 	cell amxargs[3] = { 2 * sizeof(cell), pid, idx };
 	return Py_BuildValue("i", _isPlayerAttachedObjectSlotUsed(m_AMX, amxargs));
 }
-// int IsPlayerConnected(playerid) -- TODO: test
+// int IsPlayerConnected(playerid)
 PyObject *sIsPlayerConnected(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2303,7 +2303,7 @@ PyObject *sIsPlayerInRaceCheckpoint(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), pid };
 	return Py_BuildValue("i", _isPlayerInRaceCheckpoint(m_AMX, amxargs));
 }
-// int IsPlayerInRangeOfPoint(playerid, Float:range, Float:x, Float:y, Float:z) -- TODO: test
+// int IsPlayerInRangeOfPoint(playerid, Float:range, Float:x, Float:y, Float:z)
 PyObject *sIsPlayerInRangeOfPoint(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2322,7 +2322,7 @@ PyObject *sIsPlayerInVehicle(PyObject *self, PyObject *args)
 	cell amxargs[3] = { 2 * sizeof(cell), pid, vid };
 	return Py_BuildValue("i", _isPlayerInVehicle(m_AMX, amxargs));
 }
-// int IsPlayerNPC(playerid) -- TODO: test
+// int IsPlayerNPC(playerid)
 PyObject *sIsPlayerNPC(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2340,7 +2340,7 @@ PyObject *sIsPlayerObjectMoving(PyObject *self, PyObject *args)
 	cell amxargs[2] = { sizeof(cell), oid };
 	return Py_BuildValue("i", _isPlayerObjectMoving(m_AMX, amxargs));
 }
-// int IsPlayerStreamedIn(playerid, forplayerid) -- TODO: test
+// int IsPlayerStreamedIn(playerid, forplayerid)
 PyObject *sIsPlayerStreamedIn(PyObject *self, PyObject *args)
 {
 	int pid, fpid;
@@ -2396,7 +2396,7 @@ PyObject *sIsVehicleStreamedIn(PyObject *self, PyObject *args)
 }
 // Ispacked -- no
 
-// Kick(playerid) -- TODO: test
+// Kick(playerid)
 PyObject *sKick(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2511,7 +2511,7 @@ PyObject *sPlayAudioStreamForPlayer(PyObject *self, PyObject *args)
 	amx_Release(m_AMX, amxargs[2]);
 	Py_RETURN_NONE;
 }
-// PlayCrimeReportForPlayer(playerid, suspectid, crimeid) -- TODO: test
+// PlayCrimeReportForPlayer(playerid, suspectid, crimeid)
 PyObject *sPlayCrimeReportForPlayer(PyObject *self, PyObject *args)
 {
 	int pid, sid, cid;
@@ -2521,12 +2521,12 @@ PyObject *sPlayCrimeReportForPlayer(PyObject *self, PyObject *args)
 	_playCrimeReportForPlayer(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// PlayerPlaySound(playerid, soundid, Float:x, Float:y, Float:z) -- TODO: test
+// PlayerPlaySound(playerid, soundid, Float:x, Float:y, Float:z)
 PyObject *sPlayerPlaySound(PyObject *self, PyObject *args)
 {
 	int pid, sid;
 	float x, y, z;
-	PyArg_ParseTuple(args, "iiffff", &pid, &sid, &x, &y, &z);
+	PyArg_ParseTuple(args, "iifff", &pid, &sid, &x, &y, &z);
 
 	cell amxargs[6] = { 5 * sizeof(cell), pid, sid, amx_ftoc(x), amx_ftoc(y), amx_ftoc(z) };
 	_playerPlaySound(m_AMX, amxargs);
@@ -2565,7 +2565,7 @@ PyObject *sPutPlayerInVehicle(PyObject *self, PyObject *args)
 }
 
 // Random -- use Python functions
-// RemoveBuildingForPlayer(playerid, modelid, Float:fX, Float:fY, Float:fZ, Float:fRadius) -- TODO: test
+// RemoveBuildingForPlayer(playerid, modelid, Float:fX, Float:fY, Float:fZ, Float:fRadius)
 PyObject *sRemoveBuildingForPlayer(PyObject *self, PyObject *args)
 {
 	int pid, modelid;
@@ -2626,7 +2626,7 @@ PyObject *sRepairVehicle(PyObject *self, PyObject *args)
 	_repairVehicle(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// ResetPlayerMoney(playerid) -- TODO: test
+// ResetPlayerMoney(playerid)
 PyObject *sResetPlayerMoney(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2636,7 +2636,7 @@ PyObject *sResetPlayerMoney(PyObject *self, PyObject *args)
 	_resetPlayerMoney(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// ResetPlayerWeapons(playerid) -- TODO: test
+// ResetPlayerWeapons(playerid)
 PyObject *sResetPlayerWeapons(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2672,7 +2672,7 @@ PyObject *sSendClientMessage(PyObject *self, PyObject *args)
 
 	Py_RETURN_NONE;
 }
-// SendClientMessageToAll(color, const message[]) -- TODO: test
+// SendClientMessageToAll(color, const message[])
 PyObject *sSendClientMessageToAll(PyObject *self, PyObject *args)
 {
 	PyObject *color;
@@ -2696,7 +2696,7 @@ PyObject *sSendClientMessageToAll(PyObject *self, PyObject *args)
 
 	Py_RETURN_NONE;
 }
-// SendDeathMessage(killer, victim, reason) -- TODO: test
+// SendDeathMessage(killer, victim, reason)
 PyObject *sSendDeathMessage(PyObject *self, PyObject *args)
 {
 	int k, v, reas;
@@ -2706,7 +2706,7 @@ PyObject *sSendDeathMessage(PyObject *self, PyObject *args)
 	_sendDeathMessage(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SendPlayerMessageToAll(senderid, const message[]) -- TODO: test
+// SendPlayerMessageToAll(senderid, const message[])
 PyObject *sSendPlayerMessageToAll(PyObject *self, PyObject *args)
 {
 	int sid;
@@ -2727,7 +2727,7 @@ PyObject *sSendPlayerMessageToAll(PyObject *self, PyObject *args)
 
 	Py_RETURN_NONE;
 }
-// SendPlayerMessageToPlayer(playerid, senderid, const message[]) -- TODO: test
+// SendPlayerMessageToPlayer(playerid, senderid, const message[])
 PyObject *sSendPlayerMessageToPlayer(PyObject *self, PyObject *args)
 {
 	int pid, sid;
@@ -2748,7 +2748,7 @@ PyObject *sSendPlayerMessageToPlayer(PyObject *self, PyObject *args)
 
 	Py_RETURN_NONE;
 }
-// SendRconCommand(command[]) -- TODO: test
+// SendRconCommand(command[])
 PyObject *sSendRconCommand(PyObject *self, PyObject *args)
 {
 	char *cmd = NULL;
@@ -2768,7 +2768,7 @@ PyObject *sSendRconCommand(PyObject *self, PyObject *args)
 
 	Py_RETURN_NONE;
 }
-// SetCameraBehindPlayer(playerid) -- TODO: test
+// SetCameraBehindPlayer(playerid)
 PyObject *sSetCameraBehindPlayer(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2866,7 +2866,7 @@ PyObject *sSetObjectRot(PyObject *self, PyObject *args)
 // SetPVarFloat -- no
 // SetPVarInt -- no
 // SetPVarString -- no
-// SetPlayerAmmo(playerid, weapon, ammo) -- TODO: test
+// SetPlayerAmmo(playerid, weapon, ammo)
 PyObject *sSetPlayerAmmo(PyObject *self, PyObject *args)
 {
 	int pid, w, a;
@@ -2876,7 +2876,7 @@ PyObject *sSetPlayerAmmo(PyObject *self, PyObject *args)
 	_setPlayerAmmo(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerArmedWeapon(playerid, weaponid) -- TODO: test
+// SetPlayerArmedWeapon(playerid, weaponid)
 PyObject *sSetPlayerArmedWeapon(PyObject *self, PyObject *args)
 {
 	int pid, wid;
@@ -2886,7 +2886,7 @@ PyObject *sSetPlayerArmedWeapon(PyObject *self, PyObject *args)
 	_setPlayerArmedWeapon(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerArmour(playerid, Float:armour) -- TODO: test
+// SetPlayerArmour(playerid, Float:armour)
 PyObject *sSetPlayerArmour(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2910,7 +2910,7 @@ PyObject *sSetPlayerAttachedObject(PyObject *self, PyObject *args)
 
 	return Py_BuildValue("i", ret);
 }
-// SetPlayerCameraLookAt(playerid,Float:x,Float:y,Float:z) -- TODO: test
+// SetPlayerCameraLookAt(playerid,Float:x,Float:y,Float:z)
 PyObject *sSetPlayerCameraLookAt(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2921,7 +2921,7 @@ PyObject *sSetPlayerCameraLookAt(PyObject *self, PyObject *args)
 	_setPlayerCameraLookAt(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerCameraPos(playerid,Float:x,Float:y,Float:z) -- TODO: test
+// SetPlayerCameraPos(playerid,Float:x,Float:y,Float:z)
 PyObject *sSetPlayerCameraPos(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2932,7 +2932,7 @@ PyObject *sSetPlayerCameraPos(PyObject *self, PyObject *args)
 	_setPlayerCameraPos(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerChatBubble(playerid, text[], color, Float:drawdistance, expiretime) -- TODO: test
+// SetPlayerChatBubble(playerid, text[], color, Float:drawdistance, expiretime)
 PyObject *sSetPlayerChatBubble(PyObject *self, PyObject *args)
 {
 	int pid, exp;
@@ -2955,7 +2955,7 @@ PyObject *sSetPlayerChatBubble(PyObject *self, PyObject *args)
 	//_del(col);
 	Py_RETURN_NONE;
 }
-// SetPlayerCheckpoint(playerid,Float:x,Float:y,Float:z,Float:size) -- TODO: test
+// SetPlayerCheckpoint(playerid,Float:x,Float:y,Float:z,Float:size)
 PyObject *sSetPlayerCheckpoint(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2966,7 +2966,7 @@ PyObject *sSetPlayerCheckpoint(PyObject *self, PyObject *args)
 	_setPlayerCheckpoint(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerColor(playerid,color) -- TODO: test
+// SetPlayerColor(playerid,color)
 PyObject *sSetPlayerColor(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -2980,7 +2980,7 @@ PyObject *sSetPlayerColor(PyObject *self, PyObject *args)
 	//_del(col);
 	Py_RETURN_NONE;
 }
-// SetPlayerDrunkLevel(playerid, level) -- TODO: test
+// SetPlayerDrunkLevel(playerid, level)
 PyObject *sSetPlayerDrunkLevel(PyObject *self, PyObject *args)
 {
 	int pid, lvl;
@@ -2990,7 +2990,7 @@ PyObject *sSetPlayerDrunkLevel(PyObject *self, PyObject *args)
 	_setPlayerDrunkLevel(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerFacingAngle(playerid,Float:ang) -- TODO: test
+// SetPlayerFacingAngle(playerid,Float:ang)
 PyObject *sSetPlayerFacingAngle(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -3001,7 +3001,7 @@ PyObject *sSetPlayerFacingAngle(PyObject *self, PyObject *args)
 	_setPlayerFacingAngle(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerFightingStyle(playerid, style) -- TODO: test
+// SetPlayerFightingStyle(playerid, style)
 PyObject *sSetPlayerFightingStyle(PyObject *self, PyObject *args)
 {
 	int pid, style;
@@ -3011,7 +3011,7 @@ PyObject *sSetPlayerFightingStyle(PyObject *self, PyObject *args)
 	_setPlayerFightingStyle(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerHealth(playerid, Float:health) -- TODO: test
+// SetPlayerHealth(playerid, Float:health)
 PyObject *sSetPlayerHealth(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -3027,7 +3027,7 @@ PyObject *sSetPlayerHoldingObject(PyObject *self, PyObject *args)
 {
 	Py_RETURN_NONE;
 }
-// SetPlayerInterior(playerid,interiorid) -- TODO: test
+// SetPlayerInterior(playerid,interiorid)
 PyObject *sSetPlayerInterior(PyObject *self, PyObject *args)
 {
 	int pid, iid;
@@ -3037,7 +3037,7 @@ PyObject *sSetPlayerInterior(PyObject *self, PyObject *args)
 	_setPlayerInterior(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// int SetPlayerMapIcon(playerid, iconid, Float:x, Float:y, Float:z, markertype, color, style) -- TODO: test
+// int SetPlayerMapIcon(playerid, iconid, Float:x, Float:y, Float:z, markertype, color, style)
 PyObject *sSetPlayerMapIcon(PyObject *self, PyObject *args)
 {
 	int pid, ico, marker, style;
@@ -3052,7 +3052,7 @@ PyObject *sSetPlayerMapIcon(PyObject *self, PyObject *args)
 	//_del(col);
 	Py_RETURN_NONE;
 }
-// SetPlayerMarkerForPlayer(playerid, showplayerid, color) -- TODO: test
+// SetPlayerMarkerForPlayer(playerid, showplayerid, color)
 PyObject *sSetPlayerMarkerForPlayer(PyObject *self, PyObject *args)
 {
 	int pid, spid;
@@ -3066,7 +3066,7 @@ PyObject *sSetPlayerMarkerForPlayer(PyObject *self, PyObject *args)
 	//_del(col);
 	Py_RETURN_NONE;
 }
-// int SetPlayerName(playerid, name[]) -- TODO: test
+// int SetPlayerName(playerid, name[])
 PyObject *sSetPlayerName(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -3107,7 +3107,7 @@ PyObject *sSetPlayerObjectRot(PyObject *self, PyObject *args)
 	_setPlayerObjectRot(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerPos(playerid,Float:x,Float:y,Float:z) -- TODO: test
+// SetPlayerPos(playerid,Float:x,Float:y,Float:z)
 PyObject *sSetPlayerPos(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -3118,7 +3118,7 @@ PyObject *sSetPlayerPos(PyObject *self, PyObject *args)
 	_setPlayerPos(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerPosFindZ(playerid, Float:x, Float:y, Float:z) -- TODO: test
+// SetPlayerPosFindZ(playerid, Float:x, Float:y, Float:z)
 PyObject *sSetPlayerPosFindZ(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -3129,7 +3129,7 @@ PyObject *sSetPlayerPosFindZ(PyObject *self, PyObject *args)
 	_setPlayerPosFindZ(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerRaceCheckpoint(playerid, type, Float:x, Float:y, Float:z, Float:nextx, Float:nexty, Float:nextz, Float:size) -- TODO: test
+// SetPlayerRaceCheckpoint(playerid, type, Float:x, Float:y, Float:z, Float:nextx, Float:nexty, Float:nextz, Float:size)
 PyObject *sSetPlayerRaceCheckpoint(PyObject *self, PyObject *args)
 {
 	int pid, type;
@@ -3140,7 +3140,7 @@ PyObject *sSetPlayerRaceCheckpoint(PyObject *self, PyObject *args)
 	_setPlayerRaceCheckpoint(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerScore(playerid, score) -- TODO: test
+// SetPlayerScore(playerid, score)
 PyObject *sSetPlayerScore(PyObject *self, PyObject *args)
 {
 	int pid, score;
@@ -3150,7 +3150,7 @@ PyObject *sSetPlayerScore(PyObject *self, PyObject *args)
 	_setPlayerScore(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerShopName(playerid, shopname[]) -- TODO: test
+// SetPlayerShopName(playerid, shopname[])
 PyObject *sSetPlayerShopName(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -3169,7 +3169,7 @@ PyObject *sSetPlayerShopName(PyObject *self, PyObject *args)
 	amx_Release(m_AMX, amxargs[2]);
 	Py_RETURN_NONE;
 }
-// SetPlayerSkillLevel(playerid, skill, level) -- TODO: test
+// SetPlayerSkillLevel(playerid, skill, level)
 PyObject *sSetPlayerSkillLevel(PyObject *self, PyObject *args)
 {
 	int pid, skill, lvl;
@@ -3179,7 +3179,7 @@ PyObject *sSetPlayerSkillLevel(PyObject *self, PyObject *args)
 	_setPlayerSkillLevel(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerSkin(playerid, skinid) -- TODO: test
+// SetPlayerSkin(playerid, skinid)
 PyObject *sSetPlayerSkin(PyObject *self, PyObject *args)
 {
 	int pid, skin;
@@ -3189,7 +3189,7 @@ PyObject *sSetPlayerSkin(PyObject *self, PyObject *args)
 	_setPlayerSkin(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerSpecialAction(playerid, actionid) -- TODO: test
+// SetPlayerSpecialAction(playerid, actionid)
 PyObject *sSetPlayerSpecialAction(PyObject *self, PyObject *args)
 {
 	int pid, act;
@@ -3209,7 +3209,7 @@ PyObject *sSetPlayerTeam(PyObject *self, PyObject *args)
 	_setPlayerTeam(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerTime(playerid, hour, minute) -- TODO: test
+// SetPlayerTime(playerid, hour, minute)
 PyObject *sSetPlayerTime(PyObject *self, PyObject *args)
 {
 	int pid, hour, min;
@@ -3219,7 +3219,7 @@ PyObject *sSetPlayerTime(PyObject *self, PyObject *args)
 	_setPlayerTime(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerVelocity(playerid, Float:x, Float:y, Float:z) -- TODO: test
+// SetPlayerVelocity(playerid, Float:x, Float:y, Float:z)
 PyObject *sSetPlayerVelocity(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -3230,7 +3230,7 @@ PyObject *sSetPlayerVelocity(PyObject *self, PyObject *args)
 	_setPlayerVelocity(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerVirtualWorld(playerid,worldid) -- TODO: test
+// SetPlayerVirtualWorld(playerid,worldid)
 PyObject *sSetPlayerVirtualWorld(PyObject *self, PyObject *args)
 {
 	int pid, wid;
@@ -3240,7 +3240,7 @@ PyObject *sSetPlayerVirtualWorld(PyObject *self, PyObject *args)
 	_setPlayerVirtualWorld(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerWantedLevel(playerid, level) -- TODO: test
+// SetPlayerWantedLevel(playerid, level)
 PyObject *sSetPlayerWantedLevel(PyObject *self, PyObject *args)
 {
 	int pid, lvl;
@@ -3250,7 +3250,7 @@ PyObject *sSetPlayerWantedLevel(PyObject *self, PyObject *args)
 	_setPlayerWantedLevel(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerWeather(playerid, weather) -- TODO: test
+// SetPlayerWeather(playerid, weather)
 PyObject *sSetPlayerWeather(PyObject *self, PyObject *args)
 {
 	int pid, w;
@@ -3260,7 +3260,7 @@ PyObject *sSetPlayerWeather(PyObject *self, PyObject *args)
 	_setPlayerWeather(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetPlayerWorldBounds(playerid,Float:x_max,Float:x_min,Float:y_max,Float:y_min) -- TODO: test
+// SetPlayerWorldBounds(playerid,Float:x_max,Float:x_min,Float:y_max,Float:y_min)
 PyObject *sSetPlayerWorldBounds(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -3321,7 +3321,7 @@ PyObject *sSetTimer(PyObject *self, PyObject *args)
 
 	return Py_BuildValue("l", data.id);
 }
-// SetVehicleAngularVelocity(vehicleid, Float:x, Float:y, Float:z) -- TODO: test
+// SetVehicleAngularVelocity(vehicleid, Float:x, Float:y, Float:z)
 PyObject *sSetVehicleAngularVelocity(PyObject *self, PyObject *args)
 {
 	int vid;
@@ -3332,7 +3332,7 @@ PyObject *sSetVehicleAngularVelocity(PyObject *self, PyObject *args)
 	_setVehicleAngularVelocity(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetVehicleHealth(vehicleid, Float:health) -- TODO: test
+// SetVehicleHealth(vehicleid, Float:health)
 PyObject *sSetVehicleHealth(PyObject *self, PyObject *args)
 {
 	int vid;
@@ -3343,7 +3343,7 @@ PyObject *sSetVehicleHealth(PyObject *self, PyObject *args)
 	_setVehicleHealth(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetVehicleNumberPlate(vehicleid, numberplate[]) -- TODO: test
+// SetVehicleNumberPlate(vehicleid, numberplate[])
 PyObject *sSetVehicleNumberPlate(PyObject *self, PyObject *args)
 {
 	int vid;
@@ -3361,7 +3361,7 @@ PyObject *sSetVehicleNumberPlate(PyObject *self, PyObject *args)
 	amx_Release(m_AMX, amxargs[2]);
 	Py_RETURN_NONE;
 }
-// SetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective) -- TODO: test / 0.3c
+// SetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective) -- 0.3c
 PyObject *sSetVehicleParamsEx(PyObject *self, PyObject *args)
 {
 	int vid, eng, lig, alm, doors, bonnet, boot, obj;
@@ -3371,7 +3371,7 @@ PyObject *sSetVehicleParamsEx(PyObject *self, PyObject *args)
 	_setVehicleParamsEx(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetVehicleParamsForPlayer(vehicleid,playerid,objective,doorslocked) -- TODO: test
+// SetVehicleParamsForPlayer(vehicleid,playerid,objective,doorslocked)
 PyObject *sSetVehicleParamsForPlayer(PyObject *self, PyObject *args)
 {
 	int vid, pid, obj, doors;
@@ -3381,7 +3381,7 @@ PyObject *sSetVehicleParamsForPlayer(PyObject *self, PyObject *args)
 	_setVehicleParamsForPlayer(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetVehiclePos(vehicleid, Float:x, Float:y, Float:z) -- TODO: test
+// SetVehiclePos(vehicleid, Float:x, Float:y, Float:z)
 PyObject *sSetVehiclePos(PyObject *self, PyObject *args)
 {
 	int vid;
@@ -3392,7 +3392,7 @@ PyObject *sSetVehiclePos(PyObject *self, PyObject *args)
 	_setVehiclePos(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetVehicleToRespawn(vehicleid) -- TODO: test
+// SetVehicleToRespawn(vehicleid)
 PyObject *sSetVehicleToRespawn(PyObject *self, PyObject *args)
 {
 	int vid;
@@ -3402,7 +3402,7 @@ PyObject *sSetVehicleToRespawn(PyObject *self, PyObject *args)
 	_setVehicleToRespawn(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetVehicleVelocity(vehicleid, Float:x, Float:y, Float:z) -- TODO: test
+// SetVehicleVelocity(vehicleid, Float:x, Float:y, Float:z)
 PyObject *sSetVehicleVelocity(PyObject *self, PyObject *args)
 {
 	int vid;
@@ -3413,7 +3413,7 @@ PyObject *sSetVehicleVelocity(PyObject *self, PyObject *args)
 	_setVehicleVelocity(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetVehicleVirtualWorld(vehicleid,worldid) -- TODO: test
+// SetVehicleVirtualWorld(vehicleid,worldid)
 PyObject *sSetVehicleVirtualWorld(PyObject *self, PyObject *args)
 {
 	int vid, wid;
@@ -3423,7 +3423,7 @@ PyObject *sSetVehicleVirtualWorld(PyObject *self, PyObject *args)
 	_setVehicleVirtualWorld(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetVehicleZAngle(vehicleid, Float:z_angl) -- TODO: test
+// SetVehicleZAngle(vehicleid, Float:z_angl)
 PyObject *sSetVehicleZAngle(PyObject *self, PyObject *args)
 {
 	int vid;
@@ -3434,7 +3434,7 @@ PyObject *sSetVehicleZAngle(PyObject *self, PyObject *args)
 	_setVehicleZAngle(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetWeather(weatherid) -- TODO: test
+// SetWeather(weatherid)
 PyObject *sSetWeather(PyObject *self, PyObject *args)
 {
 	int wid;
@@ -3444,7 +3444,7 @@ PyObject *sSetWeather(PyObject *self, PyObject *args)
 	_setWeather(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SetWorldTime(hour) -- TODO: test
+// SetWorldTime(hour)
 PyObject *sSetWorldTime(PyObject *self, PyObject *args)
 {
 	int h;
@@ -3475,7 +3475,7 @@ PyObject *sShowNameTags(PyObject *self, PyObject *args)
 	_showNameTags(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// ShowPlayerDialog(playerid, dialogid, style, caption[], info[], button1[], button2[]) -- TODO: test
+// ShowPlayerDialog(playerid, dialogid, style, caption[], info[], button1[], button2[])
 PyObject *sShowPlayerDialog(PyObject *self, PyObject *args)
 {
 	int pid, did, style;
@@ -3520,7 +3520,7 @@ PyObject *sShowPlayerNameTagForPlayer(PyObject *self, PyObject *args)
 	_showPlayerNameTagForPlayer(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// SpawnPlayer(playerid) -- TODO: test
+// SpawnPlayer(playerid)
 PyObject *sSpawnPlayer(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -3550,7 +3550,7 @@ PyObject *sStartRecordingPlayerData(PyObject *self, PyObject *args)
 
 	Py_RETURN_NONE;
 }
-// StopAudioStreamForPlayer(playerid) -- TODO: test
+// StopAudioStreamForPlayer(playerid)
 PyObject *sStopAudioStreamForPlayer(PyObject *self, PyObject *args)
 {
 	int pid;
@@ -3808,7 +3808,7 @@ PyObject *sTextDrawUseBox(PyObject *self, PyObject *args)
 	Py_RETURN_NONE;
 }
 // Tickcount -- no
-// TogglePlayerClock(playerid, toggle) -- TODO: test
+// TogglePlayerClock(playerid, toggle)
 PyObject *sTogglePlayerClock(PyObject *self, PyObject *args)
 {
 	int pid, tog;
@@ -3818,7 +3818,7 @@ PyObject *sTogglePlayerClock(PyObject *self, PyObject *args)
 	_togglePlayerClock(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// TogglePlayerControllable(playerid, toggle) -- TODO: test
+// TogglePlayerControllable(playerid, toggle)
 PyObject *sTogglePlayerControllable(PyObject *self, PyObject *args)
 {
 	int pid, tog;
@@ -3828,7 +3828,7 @@ PyObject *sTogglePlayerControllable(PyObject *self, PyObject *args)
 	_togglePlayerControllable(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// TogglePlayerSpectating(playerid, toggle) -- TODO: test
+// TogglePlayerSpectating(playerid, toggle)
 PyObject *sTogglePlayerSpectating(PyObject *self, PyObject *args)
 {
 	int pid, tog;
@@ -3880,7 +3880,7 @@ PyObject *sUpdatePlayer3DTextLabelText(PyObject *self, PyObject *args)
 	amx_Release(m_AMX, amxargs[4]);
 	Py_RETURN_NONE;
 }
-// UpdateVehicleDamageStatus(vehicleid, panels, doors, lights, tires) -- TODO: test
+// UpdateVehicleDamageStatus(vehicleid, panels, doors, lights, tires)
 PyObject *sUpdateVehicleDamageStatus(PyObject *self, PyObject *args)
 {
 	int vid, pan, doors, lig, tires;
@@ -3996,7 +3996,7 @@ cell AMX_NATIVE_CALL n_OnObjectMoved(AMX *amx, cell *params)
 
 	return ret;
 }
-// OnPlayerClickPlayer(playerid, clickedplayerid, source) -- TODO: test
+// OnPlayerClickPlayer(playerid, clickedplayerid, source)
 cell AMX_NATIVE_CALL n_OnPlayerClickPlayer(AMX *amx, cell *params)
 {
 	PyEnsureGIL;
@@ -4122,7 +4122,7 @@ cell AMX_NATIVE_CALL n_OnPlayerInteriorChange(AMX *amx, cell *params)
 
 	return ret;
 }
-// OnPlayerKeyStateChange(playerid, newkeys, oldkeys) -- TODO: test
+// OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 cell AMX_NATIVE_CALL n_OnPlayerKeyStateChange(AMX *amx, cell *params)
 {
 	PyEnsureGIL;
@@ -4178,7 +4178,7 @@ cell AMX_NATIVE_CALL n_OnPlayerPickUpPickup(AMX *amx, cell *params)
 	return ret;
 }
 // OnPlayerPrivmsg -- removed
-// OnPlayerRequestClass(playerid, classid) -- TODO: test
+// OnPlayerRequestClass(playerid, classid)
 cell AMX_NATIVE_CALL n_OnPlayerRequestClass(AMX *amx, cell *params)
 {
 	PyEnsureGIL;
@@ -4189,7 +4189,7 @@ cell AMX_NATIVE_CALL n_OnPlayerRequestClass(AMX *amx, cell *params)
 
 	return ret;
 }
-// OnPlayerRequestSpawn(playerid) -- TODO: test
+// OnPlayerRequestSpawn(playerid)
 cell AMX_NATIVE_CALL n_OnPlayerRequestSpawn(AMX *amx, cell *params)
 {
 	PyEnsureGIL;
@@ -4256,7 +4256,7 @@ cell AMX_NATIVE_CALL n_OnPlayerStreamOut(AMX *amx, cell *params)
 	return ret;
 }
 // OnPlayerTeamPrivmsg -- removed
-// OnPlayerText(playerid, text[]) -- TODO: test
+// OnPlayerText(playerid, text[])
 cell AMX_NATIVE_CALL n_OnPlayerText(AMX *amx, cell *params)
 {
 	char *txt = _getString(m_AMX, params[2]);
@@ -4270,7 +4270,7 @@ cell AMX_NATIVE_CALL n_OnPlayerText(AMX *amx, cell *params)
 	_del(txt);
 	return ret;
 }
-// OnPlayerUpdate(playerid) -- TODO: test
+// OnPlayerUpdate(playerid)
 cell AMX_NATIVE_CALL n_OnPlayerUpdate(AMX *amx, cell *params)
 {
 	PyEnsureGIL;

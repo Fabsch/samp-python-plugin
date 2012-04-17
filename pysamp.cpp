@@ -403,9 +403,9 @@ cell _pyCallAll(const char *funcname, PyObject *args, int nondefval, int defval)
 int _pyLoadModule(char *pyscript)
 {
 	PyObject *mod = PyImport_ImportModule(pyscript);
-	m_pyModule.push_back(mod);
 	if (!mod)
 	{
+		logprintf("PYTHON: Init: ERROR loading module %s:", pyscript);
 		// could not load the module; print the exception to stderr
 		if (PyErr_Occurred() != NULL)
 		{
@@ -420,6 +420,7 @@ int _pyLoadModule(char *pyscript)
 		}
 		return 0;
 	}
+	m_pyModule.push_back(mod);
 	//_pyInitMacros(mod);
 	// call the init function in the python script (if available)
 	PyObject *o = _pyCallFunc(mod, "OnPyInit");

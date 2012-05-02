@@ -3963,7 +3963,7 @@ cell AMX_NATIVE_CALL n_OnDialogResponse(AMX *amx, cell *params)
 
 	PyEnsureGIL;
 	PyObject *o = Py_BuildValue("iiiis", playerid, dialogid, response, listitem, str);
-	int ret = _pyCallAll("OnDialogResponse", o);
+	int ret = _pyCallAll("OnDialogResponse", o, 1, 0);
 	Py_DECREF(o);
 	PyReleaseGIL;
 

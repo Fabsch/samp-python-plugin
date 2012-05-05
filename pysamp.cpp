@@ -15,6 +15,7 @@
 //	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "pythonplugin.h"
+#include <frameobject.h> // used for building the traceback
 #include "nativefunctions.h"
 #include "pysamp.h"
 #include "constants.h"
@@ -318,12 +319,63 @@ PyMethodDef _pySampMethods[] =
 std::deque<PyObject *> m_pyModule;
 bool m_pyInited = false;
 
+void _pyLogError()
+{
+	// gets exception info and prints it out to the log
+	PyObject *ptype, *pval, *traceback;
+
+	PyErr_Fetch(&ptype, &pval, &traceback);
+	PyErr_NormalizeException(&ptype, &pval, &traceback);
+
+	PyTypeObject *type = (PyTypeObject*)ptype;
+	// print exception type and (if available) text
+	if (pval != NULL)
+	{
+		PyObject *val = PyObject_Str(pval);
+		logprintf("%s: %s", type->tp_name, PyString_AsString(val));
+		Py_DECREF(val);
+	}
+	else logprintf("%s", type->tp_name);
+
+	// if available, print traceback
+	if (traceback != NULL)
+	{
+		PyTracebackObject *tb = (PyTracebackObject*)traceback;
+		// import linecache module, which will be used to get the code lines in the traceback
+		PyObject *linecache = PyImport_ImportModule("linecache");
+		if (linecache != NULL) // if this does not work, not even Python itself will be able to print exceptions
+		{
+			PyObject *lc_getline = PyObject_GetAttrString(linecache, "getline");
+			if (lc_getline != NULL)
+			{
+				while (tb != NULL)
+				{
+					logprintf("    %s[%d] in %s", PyString_AsString(tb->tb_frame->f_code->co_filename), tb->tb_lineno, PyString_AsString(tb->tb_frame->f_code->co_name));
+					// use getline to get the code line
+					PyObject *codeline = PyObject_CallFunction(lc_getline, "OiO", tb->tb_frame->f_code->co_filename, tb->tb_lineno, tb->tb_frame->f_globals);
+					logprintf("      %s", PyString_AsString(codeline));
+					Py_DECREF(codeline);
+					tb = tb->tb_next;
+				}
+				Py_DECREF(lc_getline);
+			}
+			Py_DECREF(linecache);
+		}
+	}
+	if (PyErr_Occurred() != NULL)
+	{
+		logprintf("PYTHON: WARNING: Exception occurred while trying to print exception information");
+		PyErr_Clear();
+	}
+
+	Py_DECREF(ptype); Py_XDECREF(pval); Py_XDECREF(traceback);
+}
 
 PyObject *_pyCallObject(PyObject *func, PyObject *params)
 {
 	PyErr_Clear();
 	PyObject *ret = PyObject_CallObject(func, params);
-	if (PyErr_Occurred() != NULL) PyErr_Print();
+	if (PyErr_Occurred() != NULL) _pyLogError(); //PyErr_Print();
 	return ret;
 }
 PyObject *_pyCallFunc(PyObject *module, const char *funcname, PyObject *args)
@@ -410,8 +462,8 @@ int _pyLoadModule(char *pyscript)
 		if (PyErr_Occurred() != NULL)
 		{
 			// we have an exception -> print it
-			PyErr_Print();
-			// TODO: use logprintf to print the exception
+			_pyLogError(); // PyErr_Print();
+			// DONE: use logprintf to print the exception
 		}
 		else
 		{

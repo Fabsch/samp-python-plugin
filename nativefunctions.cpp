@@ -60,15 +60,20 @@ void _initAMX(AMX *amx)
 	_applyAnimation					= _findNative(amx, "ApplyAnimation");
 	_attach3DTextLabelToPlayer		= _findNative(amx, "Attach3DTextLabelToPlayer");
 	_attach3DTextLabelToVehicle		= _findNative(amx, "Attach3DTextLabelToVehicle");
+	_attachCameraToObject			= _findNative(amx, "AttachCameraToObject");
+	_attachCameraToPlayerObject		= _findNative(amx, "AttachCameraToPlayerObject");
 	_attachObjectToObject			= _findNative(amx, "AttachObjectToObject");
 	_attachObjectToPlayer			= _findNative(amx, "AttachObjectToPlayer");
 	_attachObjectToVehicle			= _findNative(amx, "AttachObjectToVehicle");
 	_attachPlayerObjectToPlayer		= _findNative(amx, "AttachPlayerObjectToPlayer");
+	_attachPlayerObjectToVehicle	= _findNative(amx, "AttachPlayerObjectToVehicle");
 	_attachTrailerToVehicle			= _findNative(amx, "AttachTrailerToVehicle");
 
 	_ban							= _findNative(amx, "Ban");
 	_banEx							= _findNative(amx, "BanEx");
 
+	_cancelEdit						= _findNative(amx, "CancelEdit");
+	_cancelSelectTextDraw			= _findNative(amx, "CancelSelectTextDraw");
 	_changeVehicleColor				= _findNative(amx, "ChangeVehicleColor");
 	_changeVehiclePaintjob			= _findNative(amx, "ChangeVehiclePaintjob");
 	_clearAnimations				= _findNative(amx, "ClearAnimations");
@@ -97,6 +102,9 @@ void _initAMX(AMX *amx)
 	_disablePlayerCheckpoint		= _findNative(amx, "DisablePlayerCheckpoint");
 	_disablePlayerRaceCheckpoint	= _findNative(amx, "DisablePlayerRaceCheckpoint");
 
+	_editObject						= _findNative(amx, "EditObject");
+	_editPlayerObject				= _findNative(amx, "EditPlayerObject");
+	_editAttachedObject				= _findNative(amx, "EditAttachedObject");
 	_enableStuntBonusForAll			= _findNative(amx, "EnableStuntBonusForAll");
 	_enableStuntBonusForPlayer		= _findNative(amx, "EnableStuntBonusForPlayer");
 	_forceClassSelection			= _findNative(amx, "ForceClassSelection");
@@ -154,6 +162,7 @@ void _initAMX(AMX *amx)
 	_getPlayerVehicleID				= _findNative(amx, "GetPlayerVehicleID");
 	_getPlayerVehicleSeat			= _findNative(amx, "GetPlayerVehicleSeat");
 	_getPlayerVelocity				= _findNative(amx, "GetPlayerVelocity");
+	_getPlayerVersion				= _findNative(amx, "GetPlayerVersion");
 	_getPlayerVirtualWorld			= _findNative(amx, "GetPlayerVirtualWorld");
 	_getPlayerWantedLevel			= _findNative(amx, "GetPlayerWantedLevel");
 	_getPlayerWeapon				= _findNative(amx, "GetPlayerWeapon");
@@ -166,6 +175,7 @@ void _initAMX(AMX *amx)
 	_getVehicleDistanceFromPoint	= _findNative(amx, "GetVehicleDistanceFromPoint");
 	_getVehicleHealth				= _findNative(amx, "GetVehicleHealth");
 	_getVehicleModel				= _findNative(amx, "GetVehicleModel");
+	_getVehicleModelInfo			= _findNative(amx, "GetVehicleModelInfo");
 	_getVehiclePos					= _findNative(amx, "GetVehiclePos");
 	_getVehicleRotationQuat			= _findNative(amx, "GetVehicleRotationQuat");
 	_getVehicleTrailer				= _findNative(amx, "GetVehicleTrailer");
@@ -178,6 +188,8 @@ void _initAMX(AMX *amx)
 
 	_hideMenuForPlayer				= _findNative(amx, "HideMenuForPlayer");
 
+	_interpolateCameraPos			= _findNative(amx, "InterpolateCameraPos");
+	_interpolateCameraLookAt		= _findNative(amx, "InterpolateCameraLookAt");
 	_isObjectMoving					= _findNative(amx, "IsObjectMoving");
 	_isPlayerAdmin					= _findNative(amx, "IsPlayerAdmin");
 	_isPlayerAttachedObjectSlotUsed	= _findNative(amx, "IsPlayerAttachedObjectSlotUsed");
@@ -215,6 +227,24 @@ void _initAMX(AMX *amx)
 	_playerSpectateVehicle			= _findNative(amx, "PlayerSpectateVehicle");
 	_putPlayerInVehicle				= _findNative(amx, "PutPlayerInVehicle");
 
+	_createPlayerTextDraw			= _findNative(amx, "CreatePlayerTextDraw");
+	_playerTextDrawDestroy			= _findNative(amx, "PlayerTextDrawDestroy");
+	_playerTextDrawLetterSize		= _findNative(amx, "PlayerTextDrawLetterSize");
+	_playerTextDrawTextSize			= _findNative(amx, "PlayerTextDrawTextSize");
+	_playerTextDrawAlignment		= _findNative(amx, "PlayerTextDrawAlignment");
+	_playerTextDrawColor			= _findNative(amx, "PlayerTextDrawColor");
+	_playerTextDrawUseBox			= _findNative(amx, "PlayerTextDrawUseBox");
+	_playerTextDrawBoxColor			= _findNative(amx, "PlayerTextDrawBoxColor");
+	_playerTextDrawSetShadow		= _findNative(amx, "PlayerTextDrawSetShadow");
+	_playerTextDrawSetOutline		= _findNative(amx, "PlayerTextDrawSetOutline");
+	_playerTextDrawBackgroundColor	= _findNative(amx, "PlayerTextDrawBackgroundColor");
+	_playerTextDrawFont				= _findNative(amx, "PlayerTextDrawFont");
+	_playerTextDrawSetProportional	= _findNative(amx, "PlayerTextDrawSetProportional");
+	_playerTextDrawSetSelectable	= _findNative(amx, "PlayerTextDrawSetSelectable");
+	_playerTextDrawShow				= _findNative(amx, "PlayerTextDrawShow");
+	_playerTextDrawHide				= _findNative(amx, "PlayerTextDrawHide");
+	_playerTextDrawSetString		= _findNative(amx, "PlayerTextDrawSetString");
+
 	_removeBuildingForPlayer		= _findNative(amx, "RemoveBuildingForPlayer");
 	_removePlayerAttachedObject		= _findNative(amx, "RemovePlayerAttachedObject");
 	_removePlayerFromVehicle		= _findNative(amx, "RemovePlayerFromVehicle");
@@ -224,6 +254,8 @@ void _initAMX(AMX *amx)
 	_resetPlayerMoney				= _findNative(amx, "ResetPlayerMoney");
 	_resetPlayerWeapons				= _findNative(amx, "ResetPlayerWeapons");
 
+	_selectObject					= _findNative(amx, "SelectObject");
+	_selectTextDraw					= _findNative(amx, "SelectTextDraw");
 	_sendClientMessage				= _findNative(amx, "SendClientMessage");
 	_sendClientMessageToAll			= _findNative(amx, "SendClientMessageToAll");
 	_sendDeathMessage				= _findNative(amx, "SendDeathMessage");
@@ -235,6 +267,8 @@ void _initAMX(AMX *amx)
 	_setGravity						= _findNative(amx, "SetGravity");
 	_setMenuColumnHeader			= _findNative(amx, "SetMenuColumnHeader");
 	_setNameTagDrawDistance			= _findNative(amx, "SetNameTagDrawDistance");
+	_setObjectMaterial				= _findNative(amx, "SetObjectMaterial");
+	_setObjectMaterialText			= _findNative(amx, "SetObjectMaterialText");
 	_setObjectPos					= _findNative(amx, "SetObjectPos");
 	_setObjectRot					= _findNative(amx, "SetObjectRot");
 	_setPlayerAmmo					= _findNative(amx, "SetPlayerAmmo");
@@ -255,6 +289,8 @@ void _initAMX(AMX *amx)
 	_setPlayerMapIcon				= _findNative(amx, "SetPlayerMapIcon");
 	_setPlayerMarkerForPlayer		= _findNative(amx, "SetPlayerMarkerForPlayer");
 	_setPlayerName					= _findNative(amx, "SetPlayerName");
+	_setPlayerObjectMaterial		= _findNative(amx, "SetPlayerObjectMaterial");
+	_setPlayerObjectMaterialText	= _findNative(amx, "SetPlayerObjectMaterialText");
 	_setPlayerObjectPos				= _findNative(amx, "SetPlayerObjectPos");
 	_setPlayerObjectRot				= _findNative(amx, "SetPlayerObjectRot");
 	_setPlayerPos					= _findNative(amx, "SetPlayerPos");
@@ -312,6 +348,7 @@ void _initAMX(AMX *amx)
 	_textDrawLetterSize				= _findNative(amx, "TextDrawLetterSize");
 	_textDrawSetOutline				= _findNative(amx, "TextDrawSetOutline");
 	_textDrawSetProportional		= _findNative(amx, "TextDrawSetProportional");
+	_textDrawSetSelectable		= _findNative(amx, "TextDrawSetSelectable");
 	_textDrawSetShadow				= _findNative(amx, "TextDrawSetShadow");
 	_textDrawSetString				= _findNative(amx, "TextDrawSetString");
 	_textDrawShowForAll				= _findNative(amx, "TextDrawShowForAll");
@@ -346,15 +383,20 @@ amx_function_t _allowPlayerTeleport;
 amx_function_t _applyAnimation;
 amx_function_t _attach3DTextLabelToPlayer;
 amx_function_t _attach3DTextLabelToVehicle;
+amx_function_t _attachCameraToObject;
+amx_function_t _attachCameraToPlayerObject;
 amx_function_t _attachObjectToObject;
 amx_function_t _attachObjectToPlayer;
 amx_function_t _attachObjectToVehicle;
 amx_function_t _attachPlayerObjectToPlayer;
+amx_function_t _attachPlayerObjectToVehicle;
 amx_function_t _attachTrailerToVehicle;
 
 amx_function_t _ban;
 amx_function_t _banEx;
 
+amx_function_t _cancelEdit;
+amx_function_t _cancelSelectTextDraw;
 amx_function_t _changeVehicleColor;
 amx_function_t _changeVehiclePaintjob;
 amx_function_t _clearAnimations;
@@ -383,6 +425,9 @@ amx_function_t _disableNameTagLOS;
 amx_function_t _disablePlayerCheckpoint;
 amx_function_t _disablePlayerRaceCheckpoint;
 
+amx_function_t _editObject;
+amx_function_t _editPlayerObject;
+amx_function_t _editAttachedObject;
 amx_function_t _enableStuntBonusForAll;
 amx_function_t _enableStuntBonusForPlayer;
 amx_function_t _forceClassSelection;
@@ -440,6 +485,7 @@ amx_function_t _getPlayerTime;
 amx_function_t _getPlayerVehicleID;
 amx_function_t _getPlayerVehicleSeat;
 amx_function_t _getPlayerVelocity;
+amx_function_t _getPlayerVersion;
 amx_function_t _getPlayerVirtualWorld;
 amx_function_t _getPlayerWantedLevel;
 amx_function_t _getPlayerWeapon;
@@ -452,6 +498,7 @@ amx_function_t _getVehicleDamageStatus;
 amx_function_t _getVehicleDistanceFromPoint;
 amx_function_t _getVehicleHealth;
 amx_function_t _getVehicleModel;
+amx_function_t _getVehicleModelInfo;
 amx_function_t _getVehiclePos;
 amx_function_t _getVehicleRotationQuat;
 amx_function_t _getVehicleTrailer;
@@ -464,6 +511,8 @@ amx_function_t _givePlayerWeapon;
 
 amx_function_t _hideMenuForPlayer;
 
+amx_function_t _interpolateCameraPos;
+amx_function_t _interpolateCameraLookAt;
 amx_function_t _isObjectMoving;
 amx_function_t _isPlayerAdmin;
 amx_function_t _isPlayerAttachedObjectSlotUsed;
@@ -501,6 +550,24 @@ amx_function_t _playerSpectatePlayer;
 amx_function_t _playerSpectateVehicle;
 amx_function_t _putPlayerInVehicle;
 
+amx_function_t _createPlayerTextDraw;
+amx_function_t _playerTextDrawDestroy;
+amx_function_t _playerTextDrawLetterSize;
+amx_function_t _playerTextDrawTextSize;
+amx_function_t _playerTextDrawAlignment;
+amx_function_t _playerTextDrawColor;
+amx_function_t _playerTextDrawUseBox;
+amx_function_t _playerTextDrawBoxColor;
+amx_function_t _playerTextDrawSetShadow;
+amx_function_t _playerTextDrawSetOutline;
+amx_function_t _playerTextDrawBackgroundColor;
+amx_function_t _playerTextDrawFont;
+amx_function_t _playerTextDrawSetProportional;
+amx_function_t _playerTextDrawSetSelectable;
+amx_function_t _playerTextDrawShow;
+amx_function_t _playerTextDrawHide;
+amx_function_t _playerTextDrawSetString;
+
 amx_function_t _removeBuildingForPlayer;
 amx_function_t _removePlayerAttachedObject;
 amx_function_t _removePlayerFromVehicle;
@@ -510,6 +577,8 @@ amx_function_t _repairVehicle;
 amx_function_t _resetPlayerMoney;
 amx_function_t _resetPlayerWeapons;
 
+amx_function_t _selectObject;
+amx_function_t _selectTextDraw;
 amx_function_t _sendClientMessage;
 amx_function_t _sendClientMessageToAll;
 amx_function_t _sendDeathMessage;
@@ -521,6 +590,8 @@ amx_function_t _setGameModeText;
 amx_function_t _setGravity;
 amx_function_t _setMenuColumnHeader;
 amx_function_t _setNameTagDrawDistance;
+amx_function_t _setObjectMaterial;
+amx_function_t _setObjectMaterialText;
 amx_function_t _setObjectPos;
 amx_function_t _setObjectRot;
 amx_function_t _setPlayerAmmo;
@@ -541,6 +612,8 @@ amx_function_t _setPlayerInterior;
 amx_function_t _setPlayerMapIcon;
 amx_function_t _setPlayerMarkerForPlayer;
 amx_function_t _setPlayerName;
+amx_function_t _setPlayerObjectMaterial;
+amx_function_t _setPlayerObjectMaterialText;
 amx_function_t _setPlayerObjectPos;
 amx_function_t _setPlayerObjectRot;
 amx_function_t _setPlayerPos;
@@ -598,6 +671,7 @@ amx_function_t _textDrawHideForPlayer;
 amx_function_t _textDrawLetterSize;
 amx_function_t _textDrawSetOutline;
 amx_function_t _textDrawSetProportional;
+amx_function_t _textDrawSetSelectable;
 amx_function_t _textDrawSetShadow;
 amx_function_t _textDrawSetString;
 amx_function_t _textDrawShowForAll;
@@ -789,6 +863,26 @@ PyObject *sAttach3DTextLabelToVehicle(PyObject *self, PyObject *args)
 	_attach3DTextLabelToVehicle(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
+// AttachCameraToObject(playerid, objectid) -- TODO: test
+PyObject *sAttachCameraToObject(PyObject *self, PyObject *args)
+{
+	int pid, oid;
+	PyArg_ParseTuple(args, "ii", &pid, &oid);
+
+	cell amxargs[3] = { 2 * sizeof(cell), pid, oid};
+	_attachCameraToObject(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// AttachCameraToPlayerObject(playerid, playerobjectid) -- TODO: test
+PyObject *sAttachCameraToPlayerObject(PyObject *self, PyObject *args)
+{
+	int pid, poid;
+	PyArg_ParseTuple(args, "ii", &pid, &poid);
+
+	cell amxargs[3] = { 2 * sizeof(cell), pid, poid};
+	_attachCameraToPlayerObject(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
 // AttachObjectToObject(objectid, attachtoid, Float:OffsetX, Float:OffsetY, Float:OffsetZ, Float:RotX, Float:RotY, Float:RotZ, SyncRotation = 1) -- TODO: test
 PyObject *sAttachObjectToObject(PyObject *self, PyObject *args)
 {
@@ -837,6 +931,18 @@ PyObject *sAttachPlayerObjectToPlayer(PyObject *self, PyObject *args)
 	_attachPlayerObjectToPlayer(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
+// AttachPlayerObjectToVehicle(playerid, objectid, vehicleid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:RotZ) -- TODO: test
+PyObject *sAttachPlayerObjectToVehicle(PyObject *self, PyObject *args)
+{
+	int pid, oid, ap;
+	float ox, oy, oz, rx, ry, rz;
+
+	PyArg_ParseTuple(args, "iiiffffff", &pid, &oid, &ap, &ox, &oy, &oz, &rx, &ry, &rz);
+
+	cell amxargs[10] = { 9 * sizeof(cell), pid, oid, ap, amx_ftoc(ox), amx_ftoc(oy), amx_ftoc(oz), amx_ftoc(rx), amx_ftoc(ry), amx_ftoc(rz) };
+	_attachPlayerObjectToVehicle(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
 // AttachTrailerToVehicle(trailerid, vehicleid) -- TODO: test
 PyObject *sAttachTrailerToVehicle(PyObject *self, PyObject *args)
 {
@@ -883,6 +989,26 @@ PyObject *sBanEx(PyObject *self, PyObject *args)
 
 // CallLocalFunction -- no
 // CallRemoteFunction -- doesn't semm to work anyway (like timers) with non-string parameters
+// CancelEdit(playerid) -- TODO: test
+PyObject *sCancelEdit(PyObject *self, PyObject *args)
+{
+	int playerid;
+	PyArg_ParseTuple(args, "i", &playerid);
+
+	cell amxargs[2] = { sizeof(cell), playerid };
+	_cancelEdit(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// CancelSelectTextDraw(playerid) -- TODO: test
+PyObject *sCancelSelectTextDraw(PyObject *self, PyObject *args)
+{
+	int playerid;
+	PyArg_ParseTuple(args, "i", &playerid);
+
+	cell amxargs[2] = { sizeof(cell), playerid };
+	_cancelSelectTextDraw(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
 // ChangeVehicleColor(vehicleid, color1, color2)
 PyObject *sChangeVehicleColor(PyObject *self, PyObject *args)
 {
@@ -1196,6 +1322,36 @@ PyObject *sDisablePlayerRaceCheckpoint(PyObject *self, PyObject *args)
 	Py_RETURN_NONE;
 }
 
+// EditObject(playerid, objectid) -- TODO: test
+PyObject *sEditObject(PyObject *self, PyObject *args)
+{
+	int playerid, objectid;
+	PyArg_ParseTuple(args, "ii", &playerid, &objectid);
+
+	cell amxargs[3] = { 2 * sizeof(cell), playerid, objectid };
+	_editObject(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// EditPlayerObject(playerid, objectid) -- TODO: test
+PyObject *sEditPlayerObject(PyObject *self, PyObject *args)
+{
+	int playerid, objectid;
+	PyArg_ParseTuple(args, "ii", &playerid, &objectid);
+
+	cell amxargs[3] = { 2 * sizeof(cell), playerid, objectid };
+	_editPlayerObject(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// EditAttachedObject(playerid, index) -- TODO: test
+PyObject *sEditAttachedObject(PyObject *self, PyObject *args)
+{
+	int playerid, idx;
+	PyArg_ParseTuple(args, "ii", &playerid, &idx);
+
+	cell amxargs[3] = { 2 * sizeof(cell), playerid, idx };
+	_editAttachedObject(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
 // EnableStuntBonusForAll(enable) -- TODO: test
 PyObject *sEnableStuntBonusForAll(PyObject *self, PyObject *args)
 {
@@ -1945,6 +2101,29 @@ PyObject *sGetPlayerVelocity(PyObject *self, PyObject *args)
 
 	return Py_BuildValue("{s:f,s:f,s:f}", "x", p[0], "y", p[1], "z", p[2]);
 }
+// GetPlayerVersion(playerid, const version[], len) -- TODO: test
+PyObject *sGetPlayerVersion(PyObject *self, PyObject *args)
+{
+	int pid;
+	PyArg_ParseTuple(args, "i", &pid);
+
+	cell *strretstr;
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, 0, 16 };
+
+	amx_Allot(m_AMX, 16, amxargs + 2, &strretstr);
+
+	_getPlayerVersion(m_AMX, amxargs);
+
+	char *retstr = _getString(m_AMX, amxargs[2]);
+
+	PyObject *retval = Py_BuildValue("s", retstr);
+
+	amx_Release(m_AMX, amxargs[2]);
+	_del(retstr);
+
+	return retval;
+}
 // int GetPlayerVirtualWorld(playerid)
 PyObject *sGetPlayerVirtualWorld(PyObject *self, PyObject *args)
 {
@@ -2080,6 +2259,25 @@ PyObject *sGetVehicleModel(PyObject *self, PyObject *args)
 
 	cell amxargs[2] = { sizeof(cell), vid };
 	return Py_BuildValue("i", _getVehicleModel(m_AMX, amxargs));
+}
+// GetVehicleModelInfo(vehiclemodel, infotype, &Float:X, &Float:Y, &Float:Z) -- TODO: test
+PyObject *sGetVehicleModelInfo(PyObject *self, PyObject *args)
+{
+	int vmodel, itype;
+	cell *ref_addr[3];
+	PyArg_ParseTuple(args, "ii", &vmodel, &itype);
+
+	cell amxargs[6] = { 5 * sizeof(cell), vmodel, itype, 0, 0, 0 };
+	amx_Allot(m_AMX, 1, amxargs + 3, ref_addr);
+	amx_Allot(m_AMX, 1, amxargs + 4, ref_addr + 1);
+	amx_Allot(m_AMX, 1, amxargs + 5, ref_addr + 2);
+
+	_getVehicleModelInfo(m_AMX, amxargs);
+
+	float p[3] = { amx_ctof(*ref_addr[0]), amx_ctof(*ref_addr[1]), amx_ctof(*ref_addr[2]) };
+	amx_Release(m_AMX, amxargs[3]); amx_Release(m_AMX, amxargs[4]); amx_Release(m_AMX, amxargs[5]);
+
+	return Py_BuildValue("{s:f,s:f,s:f}", "x", p[0], "y", p[1], "z", p[2]);
 }
 // GetVehiclePos(vehicleid, &Float:X, &Float:Y, &Float:Z) -- TODO: test
 PyObject *sGetVehiclePos(PyObject *self, PyObject *args)
@@ -2231,6 +2429,28 @@ PyObject *sHideMenuForPlayer(PyObject *self, PyObject *args)
 	Py_RETURN_NONE;
 }
 
+// InterpolateCameraPos(playerid, Float:FromX, Float:FromY, Float:FromZ, Float:ToX, Float:ToY, Float:ToZ, time, cut = CAMERA_CUT) -- TODO: test
+PyObject *sInterpolateCameraPos(PyObject *self, PyObject *args)
+{
+	int pid, time, cut = CAMERA_CUT;
+	float fx, fy, fz, tx, ty, tz;
+	PyArg_ParseTuple(args, "iffffffi|i", &pid, &fx, &fy, &fz, &tx, &ty, &tz, &time, &cut);
+
+	cell amxargs[10] = { 9 * sizeof(cell), pid, amx_ftoc(fx), amx_ftoc(fy), amx_ftoc(fz), amx_ftoc(tx), amx_ftoc(ty), amx_ftoc(tz), time, cut };
+	_interpolateCameraPos(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// InterpolateCameraLookAt(playerid, Float:FromX, Float:FromY, Float:FromZ, Float:ToX, Float:ToY, Float:ToZ, time, cut = CAMERA_CUT) -- TODO: test
+PyObject *sInterpolateCameraLookAt(PyObject *self, PyObject *args)
+{
+	int pid, time, cut = CAMERA_CUT;
+	float fx, fy, fz, tx, ty, tz;
+	PyArg_ParseTuple(args, "iffffffi|i", &pid, &fx, &fy, &fz, &tx, &ty, &tz, &time, &cut);
+
+	cell amxargs[10] = { 9 * sizeof(cell), pid, amx_ftoc(fx), amx_ftoc(fy), amx_ftoc(fz), amx_ftoc(tx), amx_ftoc(ty), amx_ftoc(tz), time, cut };
+	_interpolateCameraLookAt(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
 // int IsObjectMoving(objectid) -- TODO: test
 PyObject *sIsObjectMoving(PyObject *self, PyObject *args)
 {
@@ -2564,6 +2784,204 @@ PyObject *sPutPlayerInVehicle(PyObject *self, PyObject *args)
 	Py_RETURN_NONE;
 }
 
+// PlayerText:CreatePlayerTextDraw(playerid, Float:x, Float:y, text[])
+PyObject *sCreatePlayerTextDraw(PyObject *self, PyObject *args)
+{
+	int pid;
+	float x, y;
+	char *txt = NULL;
+	PyArg_ParseTuple(args, "iffs", &pid, &x, &y, &txt);
+
+	cell amxargs[5] = { 4 * sizeof(cell), pid, amx_ftoc(x), amx_ftoc(y), 0 };
+
+	cell *strtxt;
+	amx_Allot(m_AMX, strlen(txt) + 1, amxargs + 4, &strtxt);
+	amx_SetString(strtxt, txt, 0, 0, strlen(txt) + 1);
+
+	cell ret = _createPlayerTextDraw(m_AMX, amxargs);
+
+	amx_Release(m_AMX, amxargs[4]);
+	return Py_BuildValue("i", ret);
+}
+// PlayerTextDrawDestroy(playerid, PlayerText:text) -- TODO: test
+PyObject *sPlayerTextDrawDestroy(PyObject *self, PyObject *args)
+{
+	int pid, txt;
+	PyArg_ParseTuple(args, "ii", &pid, &txt);
+
+	cell amxargs[3] = { 2 * sizeof(cell), pid, txt };
+	_playerTextDrawDestroy(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawLetterSize(playerid, PlayerText:text, Float:x, Float:y)
+PyObject *sPlayerTextDrawLetterSize(PyObject *self, PyObject *args)
+{
+	int pid, txt;
+	float x, y;
+	PyArg_ParseTuple(args, "iiff", &pid, &txt, &x, &y);
+
+	cell amxargs[5] = { 4 * sizeof(cell), pid, txt, amx_ftoc(x), amx_ftoc(y) };
+	_playerTextDrawLetterSize(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawTextSize(playerid, PlayerText:text, Float:x, Float:y) -- TODO: test
+PyObject *sPlayerTextDrawTextSize(PyObject *self, PyObject *args)
+{
+	int pid, txt;
+	float x, y;
+	PyArg_ParseTuple(args, "iiff", &pid, &txt, &x, &y);
+
+	cell amxargs[5] = { 4 * sizeof(cell), pid, txt, amx_ftoc(x), amx_ftoc(y) };
+	_playerTextDrawTextSize(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawAlignment(playerid, PlayerText:text, alignment) -- TODO: test
+PyObject *sPlayerTextDrawAlignment(PyObject *self, PyObject *args)
+{
+	int pid, text, alig;
+	PyArg_ParseTuple(args, "iii", &pid, &text, &alig);
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, text, alig };
+	_playerTextDrawAlignment(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawColor(playerid, PlayerText:text, color) -- TODO: test
+PyObject *sPlayerTextDrawColor(PyObject *self, PyObject *args)
+{
+	int pid, text;
+	PyObject *color;
+	PyArg_ParseTuple(args, "iiO", &pid, &text, &color);
+	_getColor(color);
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, text, colcode };
+	_playerTextDrawColor(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawUseBox(playerid, PlayerText:text, use) -- TODO: test
+PyObject *sPlayerTextDrawUseBox(PyObject *self, PyObject *args)
+{
+	int pid, txt, use;
+	PyArg_ParseTuple(args, "iii", &pid, &txt, &use);
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, txt, use };
+	_playerTextDrawUseBox(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawBoxColor(playerid, PlayerText:text, color) -- TODO: test
+PyObject *sPlayerTextDrawBoxColor(PyObject *self, PyObject *args)
+{
+	int pid, text;
+	PyObject *color;
+	PyArg_ParseTuple(args, "iiO", &pid, &text, &color);
+	_getColor(color);
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, text, colcode };
+	_playerTextDrawBoxColor(m_AMX, amxargs);
+
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawSetShadow(playerid, PlayerText:text, size) -- TODO: test
+PyObject *sPlayerTextDrawSetShadow(PyObject *self, PyObject *args)
+{
+	int pid, txt, size;
+	PyArg_ParseTuple(args, "iii", &pid, &txt, &size);
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, txt, size };
+	_playerTextDrawSetShadow(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawSetOutline(playerid, PlayerText:text, size)
+PyObject *sPlayerTextDrawSetOutline(PyObject *self, PyObject *args)
+{
+	int pid, txt, size;
+	PyArg_ParseTuple(args, "iii", &pid, &txt, &size);
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, txt, size };
+	_playerTextDrawSetOutline(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawBackgroundColor(playerid, PlayerText:text, color) -- TODO: test
+PyObject *sPlayerTextDrawBackgroundColor(PyObject *self, PyObject *args)
+{
+	int pid, text;
+	PyObject *color;
+	PyArg_ParseTuple(args, "iiO", &pid, &text, &color);
+	_getColor(color);
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, text, colcode };
+	_playerTextDrawBackgroundColor(m_AMX, amxargs);
+
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawFont(playerid, PlayerText:text, font) -- TODO: test
+PyObject *sPlayerTextDrawFont(PyObject *self, PyObject *args)
+{
+	int pid, txt, font;
+	PyArg_ParseTuple(args, "iii", &pid, &txt, &font);
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, txt, font };
+	_playerTextDrawFont(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawSetProportional(playerid, PlayerText:text, set) -- TODO: test
+PyObject *sPlayerTextDrawSetProportional(PyObject *self, PyObject *args)
+{
+	int pid, txt, set;
+	PyArg_ParseTuple(args, "iii", &pid, &txt, &set);
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, txt, set };
+	_playerTextDrawSetProportional(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawSetSelectable(playerid, PlayerText:text, set)
+PyObject *sPlayerTextDrawSetSelectable(PyObject *self, PyObject *args)
+{
+	int pid, txt, set;
+	PyArg_ParseTuple(args, "iii", &pid, &txt, &set);
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, txt, set };
+	_playerTextDrawSetSelectable(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawShow(playerid, PlayerText:text)
+PyObject *sPlayerTextDrawShow(PyObject *self, PyObject *args)
+{
+	int pid, txt;
+	PyArg_ParseTuple(args, "ii", &pid, &txt);
+
+	cell amxargs[3] = { 2 * sizeof(cell), pid, txt};
+	_playerTextDrawShow(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawHide(playerid, PlayerText:text)
+PyObject *sPlayerTextDrawHide(PyObject *self, PyObject *args)
+{
+	int pid, txt;
+	PyArg_ParseTuple(args, "ii", &pid, &txt);
+
+	cell amxargs[3] = { 2 * sizeof(cell), pid, txt};
+	_playerTextDrawHide(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawSetString(playerid, PlayerText:text, string[])
+PyObject *sPlayerTextDrawSetString(PyObject *self, PyObject *args)
+{
+	int pid, txt;
+	char *string = NULL;
+	PyArg_ParseTuple(args, "iis", &pid, &txt, &string);
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, txt, 0 };
+
+	cell *strstring;
+	amx_Allot(m_AMX, strlen(string) + 1, amxargs + 3, &strstring);
+	amx_SetString(strstring, string, 0, 0, strlen(string) + 1);
+
+	_playerTextDrawSetString(m_AMX, amxargs);
+
+	amx_Release(m_AMX, amxargs[3]);
+	Py_RETURN_NONE;
+}
+
 // Random -- use Python functions
 // RemoveBuildingForPlayer(playerid, modelid, Float:fX, Float:fY, Float:fZ, Float:fRadius)
 PyObject *sRemoveBuildingForPlayer(PyObject *self, PyObject *args)
@@ -2647,6 +3065,29 @@ PyObject *sResetPlayerWeapons(PyObject *self, PyObject *args)
 	Py_RETURN_NONE;
 }
 
+// SelectObject(playerid)
+PyObject *sSelectObject(PyObject *self, PyObject *args)
+{
+	int pid;
+	PyArg_ParseTuple(args, "i", &pid);
+
+	cell amxargs[2] = { sizeof(cell), pid };
+	_selectObject(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// SelectTextDraw(playerid, hovercolor)
+PyObject *sSelectTextDraw(PyObject *self, PyObject *args)
+{
+	int pid;
+	PyObject *color;
+	PyArg_ParseTuple(args, "iO", &pid, &color);
+	_getColor(color);
+
+	cell amxargs[3] = { 2 * sizeof(cell), pid, colcode };
+	_selectTextDraw(m_AMX, amxargs);
+
+	Py_RETURN_NONE;
+}
 // void SendClientMessage(playerid, color, const message[])
 PyObject *sSendClientMessage(PyObject *self, PyObject *args)
 {
@@ -2841,6 +3282,52 @@ PyObject *sSetNameTagDrawDistance(PyObject *self, PyObject *args)
 	_setNameTagDrawDistance(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
+// SetObjectMaterial(objectid, materialindex, modelid, txdname[], texturename[], materialcolor=0)
+PyObject *sSetObjectMaterial(PyObject *self, PyObject *args)
+{
+	int oid, midx, mid;
+	unsigned int matcol = 0; // TODO: TEST!
+	char *txd = NULL, *texture = NULL;
+	PyArg_ParseTuple(args, "iiissI", &oid, &midx, &mid, &txd, &texture, &matcol);
+
+	if (txd == NULL || texture == NULL) Py_RETURN_NONE;
+	cell amxargs[7] = { 6 * sizeof(cell), oid, midx, mid, 0, 0, matcol };
+
+	cell *strtxd, *strtexture;
+	amx_Allot(m_AMX, strlen(txd) + 1, amxargs + 4, &strtxd);
+	amx_SetString(strtxd, txd, 0, 0, strlen(txd) + 1);
+	amx_Allot(m_AMX, strlen(texture) + 1, amxargs + 5, &strtexture);
+	amx_SetString(strtexture, texture, 0, 0, strlen(texture) + 1);
+
+	_setObjectMaterial(m_AMX, amxargs);
+
+	amx_Release(m_AMX, amxargs[4]); amx_Release(m_AMX, amxargs[5]);
+
+	Py_RETURN_NONE;
+}
+// SetObjectMaterialText(objectid, text[], materialindex = 0, materialsize = OBJECT_MATERIAL_SIZE_256x128, fontface[] = "Arial", fontsize = 24, bold = 1, fontcolor = 0xFFFFFFFF, backcolor = 0, textalignment = 0)
+PyObject *sSetObjectMaterialText(PyObject *self, PyObject *args)
+{
+	int oid, midx = 0, matsize = OBJECT_MATERIAL_SIZE_256x128, fontsize = 24, bold = 1, txtalig = 0;
+	unsigned int fontcol = 0xFFFFFFFF, backcol = 0; // TODO: TEST!
+	char *txt = NULL, *fontface = "Arial";
+	PyArg_ParseTuple(args, "is|iisiiIIi", &oid, &txt, &midx, &matsize, &fontface, &fontsize, &bold, &fontcol, &backcol, &txtalig);
+
+	if (txt == NULL) Py_RETURN_NONE;
+	cell amxargs[11] = { 10 * sizeof(cell), oid, 0, midx, matsize, 0, fontsize, bold, fontcol, backcol, txtalig };
+
+	cell *strtxt, *strfontface;
+	amx_Allot(m_AMX, strlen(txt) + 1, amxargs + 2, &strtxt);
+	amx_SetString(strtxt, txt, 0, 0, strlen(txt) + 1);
+	amx_Allot(m_AMX, strlen(fontface) + 1, amxargs + 5, &strfontface);
+	amx_SetString(strfontface, fontface, 0, 0, strlen(fontface) + 1);
+
+	_setObjectMaterialText(m_AMX, amxargs);
+
+	amx_Release(m_AMX, amxargs[2]); amx_Release(m_AMX, amxargs[5]);
+
+	Py_RETURN_NONE;
+}
 // SetObjectPos(objectid, Float:X, Float:Y, Float:Z) -- TODO: test
 PyObject *sSetObjectPos(PyObject *self, PyObject *args)
 {
@@ -2897,27 +3384,27 @@ PyObject *sSetPlayerArmour(PyObject *self, PyObject *args)
 	_setPlayerArmour(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
-// int SetPlayerAttachedObject(playerid, index, modelid, bone, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ) -- TODO: test / 0.3c
+// int SetPlayerAttachedObject(playerid, index, modelid, bone, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ, materialcolor1 = 0, materialcolor2 = 0) -- TODO: test / 0.3c
 PyObject *sSetPlayerAttachedObject(PyObject *self, PyObject *args)
 {
-	int pid, idx, modelid, bone;
+	int pid, idx, modelid, bone, mat1 = 0, mat2 = 0;
 	float ox, oy, oz, rx, ry, rz, sx, sy, sz;
-	PyArg_ParseTuple(args, "iiiifffffffff", &pid, &idx, &modelid, &bone, &ox, &oy, &oz, &rx, &ry, &rz, &sx, &sy, &sz);
+	PyArg_ParseTuple(args, "iiiifffffffffii", &pid, &idx, &modelid, &bone, &ox, &oy, &oz, &rx, &ry, &rz, &sx, &sy, &sz, &mat1, &mat2);
 
-	cell amxargs[14] = { 13 * sizeof(cell), pid, idx, modelid, bone, amx_ftoc(ox), amx_ftoc(oy), amx_ftoc(oz), amx_ftoc(rx), amx_ftoc(ry), amx_ftoc(rz), amx_ftoc(sx), amx_ftoc(sy), amx_ftoc(sz) };
+	cell amxargs[16] = { 15 * sizeof(cell), pid, idx, modelid, bone, amx_ftoc(ox), amx_ftoc(oy), amx_ftoc(oz), amx_ftoc(rx), amx_ftoc(ry), amx_ftoc(rz), amx_ftoc(sx), amx_ftoc(sy), amx_ftoc(sz), mat1, mat2 };
 
 	cell ret = _setPlayerAttachedObject(m_AMX, amxargs);
 
 	return Py_BuildValue("i", ret);
 }
-// SetPlayerCameraLookAt(playerid,Float:x,Float:y,Float:z)
+// SetPlayerCameraLookAt(playerid,Float:x,Float:y,Float:z,cut=CAMERA_CUT)
 PyObject *sSetPlayerCameraLookAt(PyObject *self, PyObject *args)
 {
-	int pid;
+	int pid, cut = CAMERA_CUT;
 	float x, y, z;
-	PyArg_ParseTuple(args, "ifff", &pid, &x, &y, &z);
+	PyArg_ParseTuple(args, "ifff|i", &pid, &x, &y, &z, &cut);
 
-	cell amxargs[5] = { 4 * sizeof(cell), pid, amx_ftoc(x), amx_ftoc(y), amx_ftoc(z) };
+	cell amxargs[6] = { 5 * sizeof(cell), pid, amx_ftoc(x), amx_ftoc(y), amx_ftoc(z), cut };
 	_setPlayerCameraLookAt(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
@@ -3083,6 +3570,52 @@ PyObject *sSetPlayerName(PyObject *self, PyObject *args)
 
 	//PyMem_Free(name);
 	amx_Release(m_AMX, amxargs[2]);
+	Py_RETURN_NONE;
+}
+// SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdname[], texturename[], materialcolor=0) -- TODO: test
+PyObject *sSetPlayerObjectMaterial(PyObject *self, PyObject *args)
+{
+	int pid, oid, midx, mid;
+	unsigned int matcol = 0; // TODO: TEST!
+	char *txd = NULL, *texture = NULL;
+	PyArg_ParseTuple(args, "iiiissI", &pid, &oid, &midx, &mid, &txd, &texture, &matcol);
+
+	if (txd == NULL || texture == NULL) Py_RETURN_NONE;
+	cell amxargs[8] = { 7 * sizeof(cell), pid, oid, midx, mid, 0, 0, matcol };
+
+	cell *strtxd, *strtexture;
+	amx_Allot(m_AMX, strlen(txd) + 1, amxargs + 5, &strtxd);
+	amx_SetString(strtxd, txd, 0, 0, strlen(txd) + 1);
+	amx_Allot(m_AMX, strlen(texture) + 1, amxargs + 6, &strtexture);
+	amx_SetString(strtexture, texture, 0, 0, strlen(texture) + 1);
+
+	_setPlayerObjectMaterial(m_AMX, amxargs);
+
+	amx_Release(m_AMX, amxargs[5]); amx_Release(m_AMX, amxargs[6]);
+
+	Py_RETURN_NONE;
+}
+// SetPlayerObjectMaterialText(playerid, objectid, text[], materialindex = 0, materialsize = OBJECT_MATERIAL_SIZE_256x128, fontface[] = "Arial", fontsize = 24, bold = 1, fontcolor = 0xFFFFFFFF, backcolor = 0, textalignment = 0) -- TODO: test
+PyObject *sSetPlayerObjectMaterialText(PyObject *self, PyObject *args)
+{
+	int pid, oid, midx = 0, matsize = OBJECT_MATERIAL_SIZE_256x128, fontsize = 24, bold = 1, txtalig = 0;
+	unsigned int fontcol = 0xFFFFFFFF, backcol = 0; // TODO: TEST!
+	char *txt = NULL, *fontface = "Arial";
+	PyArg_ParseTuple(args, "iis|iisiiIIi", &pid, &oid, &txt, &midx, &matsize, &fontface, &fontsize, &bold, &fontcol, &backcol, &txtalig);
+
+	if (txt == NULL) Py_RETURN_NONE;
+	cell amxargs[12] = { 11 * sizeof(cell), pid, oid, 0, midx, matsize, 0, fontsize, bold, fontcol, backcol, txtalig };
+
+	cell *strtxt, *strfontface;
+	amx_Allot(m_AMX, strlen(txt) + 1, amxargs + 3, &strtxt);
+	amx_SetString(strtxt, txt, 0, 0, strlen(txt) + 1);
+	amx_Allot(m_AMX, strlen(fontface) + 1, amxargs + 6, &strfontface);
+	amx_SetString(strfontface, fontface, 0, 0, strlen(fontface) + 1);
+
+	_setPlayerObjectMaterialText(m_AMX, amxargs);
+
+	amx_Release(m_AMX, amxargs[3]); amx_Release(m_AMX, amxargs[6]);
+
 	Py_RETURN_NONE;
 }
 // SetPlayerObjectPos(playerid, objectid, Float:X, Float:Y, Float:Z) -- TODO: test
@@ -3738,6 +4271,16 @@ PyObject *sTextDrawSetProportional(PyObject *self, PyObject *args)
 	_textDrawSetProportional(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
+// TextDrawSetSelectable(Text:text, set)
+PyObject *sTextDrawSetSelectable(PyObject *self, PyObject *args)
+{
+	int txt, set;
+	PyArg_ParseTuple(args, "ii", &txt, &set);
+
+	cell amxargs[3] = { 2 * sizeof(cell), txt, set };
+	_textDrawSetSelectable(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
 // TextDrawSetShadow(Text:text, size) -- TODO: test
 PyObject *sTextDrawSetShadow(PyObject *self, PyObject *args)
 {
@@ -4007,6 +4550,28 @@ cell AMX_NATIVE_CALL n_OnPlayerClickPlayer(AMX *amx, cell *params)
 
 	return ret;
 }
+// OnPlayerClickTextDraw(playerid, Text:clickedid) -- TODO: test
+cell AMX_NATIVE_CALL n_OnPlayerClickTextDraw(AMX *amx, cell *params)
+{
+	PyEnsureGIL;
+	PyObject *o = Py_BuildValue("(ii)", params[1], params[2]);
+	int ret = _pyCallAll("OnPlayerClickTextDraw", o);
+	Py_DECREF(o);
+	PyReleaseGIL;
+
+	return ret;
+}
+// OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid) -- TODO: test
+cell AMX_NATIVE_CALL n_OnPlayerClickPlayerTextDraw(AMX *amx, cell *params)
+{
+	PyEnsureGIL;
+	PyObject *o = Py_BuildValue("(ii)", params[1], params[2]);
+	int ret = _pyCallAll("OnPlayerClickPlayerTextDraw", o);
+	Py_DECREF(o);
+	PyReleaseGIL;
+
+	return ret;
+}
 // OnPlayerCommandText(playerid,cmdtext[])
 cell AMX_NATIVE_CALL n_OnPlayerCommandText(AMX *amx, cell *params)
 {
@@ -4051,6 +4616,28 @@ cell AMX_NATIVE_CALL n_OnPlayerDisconnect(AMX *amx, cell *params)
 	PyEnsureGIL;
 	PyObject *o = Py_BuildValue("(ii)", params[1], params[2]);
 	int ret = _pyCallAll("OnPlayerDisconnect", o);
+	Py_DECREF(o);
+	PyReleaseGIL;
+
+	return ret;
+}
+// OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, Float:fY, Float:fZ, Float:fRotX, Float:fRotY, Float:fRotZ) -- TODO: test
+cell AMX_NATIVE_CALL n_OnPlayerEditObject(AMX *amx, cell *params)
+{
+	PyEnsureGIL;
+	PyObject *o = Py_BuildValue("iiiiffffff", params[1], params[2], params[3], params[4], amx_ctof(params[5]), amx_ctof(params[6]), amx_ctof(params[7]), amx_ctof(params[8]), amx_ctof(params[9]), amx_ctof(params[10]));
+	int ret = _pyCallAll("OnPlayerEditObject", o);
+	Py_DECREF(o);
+	PyReleaseGIL;
+
+	return ret;
+}
+// OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ) -- TODO: test
+cell AMX_NATIVE_CALL n_OnPlayerEditAttachedObject(AMX *amx, cell *params)
+{
+	PyEnsureGIL;
+	PyObject *o = Py_BuildValue("iiiiiffffff", params[1], params[2], params[3], params[4], params[5], amx_ctof(params[6]), amx_ctof(params[7]), amx_ctof(params[8]), amx_ctof(params[9]), amx_ctof(params[10]), amx_ctof(params[11]), amx_ctof(params[12]), amx_ctof(params[13]), amx_ctof(params[14]));
+	int ret = _pyCallAll("OnPlayerEditAttachedObject", o);
 	Py_DECREF(o);
 	PyReleaseGIL;
 
@@ -4206,6 +4793,17 @@ cell AMX_NATIVE_CALL n_OnPlayerSelectedMenuRow(AMX *amx, cell *params)
 	PyEnsureGIL;
 	PyObject *o = Py_BuildValue("(ii)", params[1], params[2]);
 	int ret = _pyCallAll("OnPlayerSelectedMenuRow", o);
+	Py_DECREF(o);
+	PyReleaseGIL;
+
+	return ret;
+}
+// OnPlayerSelectObject(playerid, type, objectid, modelid, Float:fX, Float:fY, Float:fZ) -- TODO: test
+cell AMX_NATIVE_CALL n_OnPlayerSelectObject(AMX *amx, cell *params)
+{
+	PyEnsureGIL;
+	PyObject *o = Py_BuildValue("iiiifff", params[1], params[2], params[3], params[4], amx_ctof(params[5]), amx_ctof(params[6]), amx_ctof(params[7]));
+	int ret = _pyCallAll("OnPlayerSelectObject", o);
 	Py_DECREF(o);
 	PyReleaseGIL;
 

@@ -66,6 +66,16 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 	return pyOnPlayerClickPlayer(playerid, clickedplayerid, source);
 }
 
+public OnPlayerClickTextDraw(playerid, Text:clickedid)
+{
+	return pyOnPlayerClickTextDraw(playerid, clickedid);
+}
+
+public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
+{
+	return pyOnPlayerClickPlayerTextDraw(playerid, playertextid);
+}
+
 public OnPlayerCommandText(playerid, cmdtext[])
 {
 	return pyOnPlayerCommandText(playerid, cmdtext);
@@ -85,6 +95,16 @@ public OnPlayerDeath(playerid, killerid, reason)
 public OnPlayerDisconnect(playerid, reason)
 {
 	return pyOnPlayerDisconnect(playerid, reason);
+}
+
+public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, Float:fY, Float:fZ, Float:fRotX, Float:fRotY, Float:fRotZ)
+{
+	return pyOnPlayerEditObject(playerid, playerobject, objectid, response, fX, fY, fZ, fRotX, fRotY, fRotZ);
+}
+
+public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
+{
+	return pyOnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, fRotZ, fScaleX, fScaleY, fScaleZ);
 }
 
 public OnPlayerEnterCheckpoint(playerid)
@@ -143,6 +163,10 @@ public OnPlayerRequestSpawn(playerid)
 public OnPlayerSelectedMenuRow(playerid, row)
 {
 	return pyOnPlayerSelectedMenuRow(playerid, row);
+}
+public OnPlayerSelectObject(playerid, type, objectid, modelid, Float:fX, Float:fY, Float:fZ)
+{
+	return pyOnPlayerSelectObject(playerid, type, objectid, modelid, fX, fY, fZ);
 }
 public OnPlayerSpawn(playerid)
 {
@@ -245,14 +269,19 @@ public _unusedFunc()
 	AllowPlayerTeleport(0, 0);
 	Attach3DTextLabelToPlayer(Text3D:0, 0, 0.0, 0.0, 0.0);
 	Attach3DTextLabelToVehicle(Text3D:0, 0, 0.0, 0.0, 0.0);
+	AttachCameraToObject(0, 0);
+	AttachCameraToPlayerObject(0, 0);
 	AttachObjectToObject(0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0);
 	AttachObjectToPlayer(0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 	AttachObjectToVehicle(0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 	AttachPlayerObjectToPlayer(0, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+	AttachPlayerObjectToVehicle(0, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 	AttachTrailerToVehicle(0, 0);
 	ApplyAnimation(0, "", "", 0.0, 0, 0, 0, 0, 0, 0);
 	Ban(0);
 	BanEx(0, "");
+	CancelEdit(0);
+	CancelSelectTextDraw(0);
 	ChangeVehicleColor(0, 0, 0);
 	ChangeVehiclePaintjob(0, 0);
 	ClearAnimations(0, 0);
@@ -279,6 +308,9 @@ public _unusedFunc()
 	DisableNameTagLOS();
 	DisablePlayerCheckpoint(0);
 	DisablePlayerRaceCheckpoint(0);
+	EditObject(0, 0);
+	EditPlayerObject(0, 0);
+	EditAttachedObject(0, 0);
 	EnableStuntBonusForAll(0);
 	EnableStuntBonusForPlayer(0, 0);
 	ForceClassSelection(0);
@@ -335,6 +367,7 @@ public _unusedFunc()
 	GetPlayerVehicleID(0);
 	GetPlayerVehicleSeat(0);
 	GetPlayerVelocity(0, x, x, x);
+	GetPlayerVersion(0, "", 0);
 	GetPlayerVirtualWorld(0);
 	GetPlayerWantedLevel(0);
 	GetPlayerWeapon(0);
@@ -347,6 +380,7 @@ public _unusedFunc()
 	GetVehicleDistanceFromPoint(0, 0.0, 0.0, 0.0);
 	GetVehicleHealth(0, x);
 	GetVehicleModel(0);
+	GetVehicleModelInfo(0, 0, x, x, x);
 	GetVehiclePos(0, x, x, x);
 	GetVehicleRotationQuat(0, x, x, x, x);
 	GetVehicleTrailer(0);
@@ -357,6 +391,8 @@ public _unusedFunc()
 	GivePlayerMoney(0, 0);
 	GivePlayerWeapon(0, 0, 0);
 	HideMenuForPlayer(Menu:0, 0);
+	InterpolateCameraPos(0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0);
+	InterpolateCameraLookAt(0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0);
 	IsObjectMoving(0);
 	IsPlayerAdmin(0);
 	IsPlayerAttachedObjectSlotUsed(0, 0);
@@ -389,6 +425,23 @@ public _unusedFunc()
 	PlayerSpectatePlayer(0, 0, 0);
 	PlayerSpectateVehicle(0, 0, 0);
 	PutPlayerInVehicle(0, 0, 0);
+	CreatePlayerTextDraw(0, 0.0, 0.0, "");
+	PlayerTextDrawDestroy(0, PlayerText:0);
+	PlayerTextDrawLetterSize(0, PlayerText:0, 0.0, 0.0);
+	PlayerTextDrawTextSize(0, PlayerText:0, 0.0, 0.0);
+	PlayerTextDrawAlignment(0, PlayerText:0, 0);
+	PlayerTextDrawColor(0, PlayerText:0, 0);
+	PlayerTextDrawUseBox(0, PlayerText:0, 0);
+	PlayerTextDrawBoxColor(0, PlayerText:0, 0);
+	PlayerTextDrawSetShadow(0, PlayerText:0, 0);
+	PlayerTextDrawSetOutline(0, PlayerText:0, 0);
+	PlayerTextDrawBackgroundColor(0, PlayerText:0, 0);
+	PlayerTextDrawFont(0, PlayerText:0, 0);
+	PlayerTextDrawSetProportional(0, PlayerText:0, 0);
+	PlayerTextDrawSetSelectable(0, PlayerText:0, 0);
+	PlayerTextDrawShow(0, PlayerText:0);
+	PlayerTextDrawHide(0, PlayerText:0);
+	PlayerTextDrawSetString(0, PlayerText:0, "");
 	RemoveBuildingForPlayer(0, 0, 0.0, 0.0, 0.0, 0.0);
 	RemovePlayerAttachedObject(0, 0);
 	RemovePlayerFromVehicle(0);
@@ -397,6 +450,8 @@ public _unusedFunc()
 	RepairVehicle(0);
 	ResetPlayerMoney(0);
 	ResetPlayerWeapons(0);
+	SelectObject(0);
+	SelectTextDraw(0, 0);
 	SendClientMessage(0, 0, "");
 	SendClientMessageToAll(0, "");
 	SendDeathMessage(0, 0, 0);
@@ -408,6 +463,8 @@ public _unusedFunc()
 	SetGravity(0.0);
 	SetMenuColumnHeader(Menu:0, 0, "");
 	SetNameTagDrawDistance(0.0);
+	SetObjectMaterial(0, 0, 0, "", "");
+	SetObjectMaterialText(0, "");
 	SetObjectPos(0, 0.0, 0.0, 0.0);
 	SetObjectRot(0, 0.0, 0.0, 0.0);
 	SetPlayerAmmo(0, 0, 0);
@@ -428,6 +485,8 @@ public _unusedFunc()
 	SetPlayerMapIcon(0, 0, 0.0, 0.0, 0.0, 0, 0);
 	SetPlayerMarkerForPlayer(0, 0, 0);
 	SetPlayerName(0, "");
+	SetPlayerObjectMaterial(0, 0, 0, 0, "", "");
+	SetPlayerObjectMaterialText(0, 0, "");
 	SetPlayerObjectPos(0, 0, 0.0, 0.0, 0.0);
 	SetPlayerObjectRot(0, 0, 0.0, 0.0, 0.0);
 	SetPlayerPos(0, 0.0, 0.0, 0.0);
@@ -482,6 +541,7 @@ public _unusedFunc()
 	TextDrawHideForAll(Text:0);
 	TextDrawHideForPlayer(0, Text:0);
 	TextDrawLetterSize(Text:0, 0.0, 0.0);
+	TextDrawSetSelectable(Text:0, 0);
 	TextDrawSetOutline(Text:0, 0);
 	TextDrawSetProportional(Text:0, 0);
 	TextDrawSetShadow(Text:0, 0);

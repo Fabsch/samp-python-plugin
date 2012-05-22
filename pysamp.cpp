@@ -41,15 +41,20 @@ PyMethodDef _pySampMethods[] =
 	{ "ApplyAnimation", sApplyAnimation, METH_VARARGS, "Applies an animation to a player" },
 	{ "Attach3DTextLabelToPlayer", sAttach3DTextLabelToPlayer, METH_VARARGS, "" },
 	{ "Attach3DTextLabelToVehicle", sAttach3DTextLabelToVehicle, METH_VARARGS, "" },
+	{ "AttachCameraToObject", sAttachCameraToObject, METH_VARARGS, "" },
+	{ "AttachCameraToPlayerObject", sAttachCameraToPlayerObject, METH_VARARGS, "" },
 	{ "AttachObjectToObject", sAttachObjectToObject, METH_VARARGS, "" },
 	{ "AttachObjectToPlayer", sAttachObjectToPlayer, METH_VARARGS, "" },
 	{ "AttachObjectToVehicle", sAttachObjectToVehicle, METH_VARARGS, "" },
 	{ "AttachPlayerObjectToPlayer", sAttachPlayerObjectToPlayer, METH_VARARGS, "" },
+	{ "AttachPlayerObjectToVehicle", sAttachPlayerObjectToVehicle, METH_VARARGS, "" },
 	{ "AttachTrailerToVehicle", sAttachTrailerToVehicle, METH_VARARGS, "" },
 
 	{ "Ban", sBan, METH_VARARGS, "Bans a player" },
 	{ "BanEx", sBanEx, METH_VARARGS, "Bans a player with a reason" },
 
+	{ "CancelEdit", sCancelEdit, METH_VARARGS, "" },
+	{ "CancelSelectTextDraw", sCancelSelectTextDraw, METH_VARARGS, "" },
 	{ "ChangeVehicleColor", sChangeVehicleColor, METH_VARARGS, "Changes a vehicle's colors" },
 	{ "ChangeVehiclePaintjob", sChangeVehiclePaintjob, METH_VARARGS, "Changes a vehicle's paintjob" },
 	{ "ClearAnimations", sClearAnimations, METH_VARARGS, "Clears all animations for a player" },
@@ -78,6 +83,9 @@ PyMethodDef _pySampMethods[] =
 	{ "DisablePlayerCheckpoint", sDisablePlayerCheckpoint, METH_VARARGS, "Disables a player's checkpoint" },
 	{ "DisablePlayerRaceCheckpoint", sDisablePlayerRaceCheckpoint, METH_VARARGS, "Disables a player's race checkpoint" },
 
+	{ "EditObject", sEditObject, METH_VARARGS, "" },
+	{ "EditPlayerObject", sEditPlayerObject, METH_VARARGS, "" },
+	{ "EditAttachedObject", sEditAttachedObject, METH_VARARGS, "" },
 	{ "EnableStuntBonusForAll", sEnableStuntBonusForAll, METH_VARARGS, "Enables/disables stunt bonus for everyone" },
 	{ "EnableStuntBonusForPlayer", sEnableStuntBonusForPlayer, METH_VARARGS, "Enables/disables stunt bonus for a player" },
 	{ "ForeClassSelection", sForceClassSelection, METH_VARARGS, "Forces a player to the class selection after the next death" },
@@ -135,6 +143,7 @@ PyMethodDef _pySampMethods[] =
 	{ "GetPlayerVehicleID", sGetPlayerVehicleID, METH_VARARGS, "" },
 	{ "GetPlayerVehicleSeat", sGetPlayerVehicleSeat, METH_VARARGS, "" },
 	{ "GetPlayerVelocity", sGetPlayerVelocity, METH_VARARGS, "" },
+	{ "GetPlayerVersion", sGetPlayerVersion, METH_VARARGS, "" },
 	{ "GetPlayerVirtualWorld", sGetPlayerVirtualWorld, METH_VARARGS, "" },
 	{ "GetPlayerWantedLevel", sGetPlayerWantedLevel, METH_VARARGS, "" },
 	{ "GetPlayerWeapon", sGetPlayerWeapon, METH_VARARGS, "" },
@@ -147,6 +156,7 @@ PyMethodDef _pySampMethods[] =
 	{ "GetVehicleDistanceFromPoint", sGetVehicleDistanceFromPoint, METH_VARARGS, "" },
 	{ "GetVehicleHealth", sGetVehicleHealth, METH_VARARGS, "" },
 	{ "GetVehicleModel", sGetVehicleModel, METH_VARARGS, "" },
+	{ "GetVehicleModelInfo", sGetVehicleModelInfo, METH_VARARGS, "" },
 	{ "GetVehiclePos", sGetVehiclePos, METH_VARARGS, "" },
 	{ "GetVehicleRotationQuat", sGetVehicleRotationQuat, METH_VARARGS, "" },
 	{ "GetVehicleTrailer", sGetVehicleTrailer, METH_VARARGS, "" },
@@ -159,6 +169,8 @@ PyMethodDef _pySampMethods[] =
 
 	{ "HideMenuForPlayer", sHideMenuForPlayer, METH_VARARGS, "" },
 
+	{ "InterpolateCameraPos", sInterpolateCameraPos, METH_VARARGS, "" },
+	{ "InterpolateCameraLookAt", sInterpolateCameraLookAt, METH_VARARGS, "" },
 	{ "IsObjectMoving", sIsObjectMoving, METH_VARARGS, "" },
 	{ "IsPlayerAdmin", sIsPlayerAdmin, METH_VARARGS, "" },
 	{ "IsPlayerAttachedObjectSlotUsed", sIsPlayerAttachedObjectSlotUsed, METH_VARARGS, "" },
@@ -196,6 +208,24 @@ PyMethodDef _pySampMethods[] =
 	{ "PlayerSpectateVehicle", sPlayerSpectateVehicle, METH_VARARGS, "" },
 	{ "PutPlayerInVehicle", sPutPlayerInVehicle, METH_VARARGS, "" },
 
+	{ "CreatePlayerTextDraw", sCreatePlayerTextDraw, METH_VARARGS, "" },
+	{ "PlayerTextDrawDestroy", sPlayerTextDrawDestroy, METH_VARARGS, "" },
+	{ "PlayerTextDrawLetterSize", sPlayerTextDrawLetterSize, METH_VARARGS, "" },
+	{ "PlayerTextDrawTextSize", sPlayerTextDrawTextSize, METH_VARARGS, "" },
+	{ "PlayerTextDrawAlignment", sPlayerTextDrawAlignment, METH_VARARGS, "" },
+	{ "PlayerTextDrawColor", sPlayerTextDrawColor, METH_VARARGS, "" },
+	{ "PlayerTextDrawUseBox", sPlayerTextDrawUseBox, METH_VARARGS, "" },
+	{ "PlayerTextDrawBoxColor", sPlayerTextDrawBoxColor, METH_VARARGS, "" },
+	{ "PlayerTextDrawSetShadow", sPlayerTextDrawSetShadow, METH_VARARGS, "" },
+	{ "PlayerTextDrawSetOutline", sPlayerTextDrawSetOutline, METH_VARARGS, "" },
+	{ "PlayerTextDrawBackgroundColor", sPlayerTextDrawBackgroundColor, METH_VARARGS, "" },
+	{ "PlayerTextDrawFont", sPlayerTextDrawFont, METH_VARARGS, "" },
+	{ "PlayerTextDrawSetProportional", sPlayerTextDrawSetProportional, METH_VARARGS, "" },
+	{ "PlayerTextDrawSetSelectable", sPlayerTextDrawSetSelectable, METH_VARARGS, "" },
+	{ "PlayerTextDrawShow", sPlayerTextDrawShow, METH_VARARGS, "" },
+	{ "PlayerTextDrawHide", sPlayerTextDrawHide, METH_VARARGS, "" },
+	{ "PlayerTextDrawSetString", sPlayerTextDrawSetString, METH_VARARGS, "" },
+
 	{ "RemoveBuildingForPlayer", sRemoveBuildingForPlayer, METH_VARARGS, "" },
 	{ "RemovePlayerAttachedObject", sRemovePlayerAttachedObject, METH_VARARGS, "" },
 	{ "RemovePlayerFromVehicle", sRemovePlayerFromVehicle, METH_VARARGS, "" },
@@ -205,6 +235,8 @@ PyMethodDef _pySampMethods[] =
 	{ "ResetPlayerMoney", sResetPlayerMoney, METH_VARARGS, "" },
 	{ "ResetPlayerWeapons", sResetPlayerWeapons, METH_VARARGS, "" },
 
+	{ "SelectObject", sSelectObject, METH_VARARGS, "" },
+	{ "SelectTextDraw", sSelectTextDraw, METH_VARARGS, "" },
 	{ "SendClientMessage", sSendClientMessage, METH_VARARGS, "Sends a message to a player" },
 	{ "SendClientMessageToAll", sSendClientMessageToAll, METH_VARARGS, "" },
 	{ "SendDeathMessage", sSendDeathMessage, METH_VARARGS, "" },
@@ -216,6 +248,8 @@ PyMethodDef _pySampMethods[] =
 	{ "SetGravity", sSetGravity, METH_VARARGS, "Sets the gravity on the server" },
 	{ "SetMenuColumnHeader", sSetMenuColumnHeader, METH_VARARGS, "" },
 	{ "SetNameTagDrawDistance", sSetNameTagDrawDistance, METH_VARARGS, "" },
+	{ "SetObjectMaterial", sSetObjectMaterial, METH_VARARGS, "" },
+	{ "SetObjectMaterialText", sSetObjectMaterialText, METH_VARARGS, "" },
 	{ "SetObjectPos", sSetObjectPos, METH_VARARGS, "" },
 	{ "SetObjectRot", sSetObjectRot, METH_VARARGS, "" },
 	{ "SetPlayerAmmo", sSetPlayerAmmo, METH_VARARGS, "" },
@@ -236,6 +270,8 @@ PyMethodDef _pySampMethods[] =
 	{ "SetPlayerMapIcon", sSetPlayerMapIcon, METH_VARARGS, "" },
 	{ "SetPlayerMarkerForPlayer", sSetPlayerMarkerForPlayer, METH_VARARGS, "" },
 	{ "SetPlayerName", sSetPlayerName, METH_VARARGS, "" },
+	{ "SetPlayerObjectMaterial", sSetPlayerObjectMaterial, METH_VARARGS, "" },
+	{ "SetPlayerObjectMaterialText", sSetPlayerObjectMaterialText, METH_VARARGS, "" },
 	{ "SetPlayerObjectPos", sSetPlayerObjectPos, METH_VARARGS, "" },
 	{ "SetPlayerObjectRot", sSetPlayerObjectRot, METH_VARARGS, "" },
 	{ "SetPlayerPos", sSetPlayerPos, METH_VARARGS, "" },
@@ -293,6 +329,7 @@ PyMethodDef _pySampMethods[] =
 	{ "TextDrawLetterSize", sTextDrawLetterSize, METH_VARARGS, "" },
 	{ "TextDrawSetOutline", sTextDrawSetOutline, METH_VARARGS, "" },
 	{ "TextDrawSetProportional", sTextDrawSetProportional, METH_VARARGS, "" },
+	{ "TextDrawSetSelectable", sTextDrawSetSelectable, METH_VARARGS, "" },
 	{ "TextDrawSetShadow", sTextDrawSetShadow, METH_VARARGS, "" },
 	{ "TextDrawSetString", sTextDrawSetString, METH_VARARGS, "" },
 	{ "TextDrawShowForAll", sTextDrawShowForAll, METH_VARARGS, "" },
@@ -526,6 +563,7 @@ void _pyInitMacros(PyObject *module)
 	PyModule_AddIntMacro(module, INVALID_OBJECT_ID);
 	PyModule_AddIntMacro(module, MAX_GANG_ZONES);
 	PyModule_AddIntMacro(module, MAX_TEXT_DRAWS);
+	PyModule_AddIntMacro(module, MAX_PLAYER_TEXT_DRAWS);
 	PyModule_AddIntMacro(module, MAX_MENUS);
 	PyModule_AddIntMacro(module, MAX_3DTEXT_GLOBAL);
 	PyModule_AddIntMacro(module, MAX_3DTEXT_PLAYER);
@@ -626,6 +664,13 @@ void _pyInitMacros(PyObject *module)
 	PyModule_AddIntMacro(module, KEY_RIGHT);
 	
 	PyModule_AddIntMacro(module, CLICK_SOURCE_SCOREBOARD);
+
+	PyModule_AddIntMacro(module, EDIT_RESPONSE_CANCEL);
+	PyModule_AddIntMacro(module, EDIT_RESPONSE_FINAL);
+	PyModule_AddIntMacro(module, EDIT_RESPONSE_UPDATE);
+
+	PyModule_AddIntMacro(module, SELECT_OBJECT_GLOBAL_OBJECT);
+	PyModule_AddIntMacro(module, SELECT_OBJECT_PLAYER_OBJECT);
 	
 	
 	PyModule_AddIntMacro(module, SPECIAL_ACTION_NONE);
@@ -645,6 +690,10 @@ void _pyInitMacros(PyObject *module)
 	PyModule_AddIntMacro(module, SPECIAL_ACTION_SMOKE_CIGGY);
 	PyModule_AddIntMacro(module, SPECIAL_ACTION_DRINK_WINE);
 	PyModule_AddIntMacro(module, SPECIAL_ACTION_DRINK_SPRUNK);
+	PyModule_AddIntMacro(module, SPECIAL_ACTION_CUFFED);
+
+	PyModule_AddIntMacro(module, CAMERA_CUT);
+	PyModule_AddIntMacro(module, CAMERA_MOVE);
 	
 	PyModule_AddIntMacro(module, FIGHT_STYLE_NORMAL);
 	PyModule_AddIntMacro(module, FIGHT_STYLE_BOXING);
@@ -707,6 +756,35 @@ void _pyInitMacros(PyObject *module)
 	PyModule_AddIntMacro(module, VEHICLE_PARAMS_UNSET);
 	PyModule_AddIntMacro(module, VEHICLE_PARAMS_OFF);
 	PyModule_AddIntMacro(module, VEHICLE_PARAMS_ON);
+
+	PyModule_AddIntMacro(module, VEHICLE_MODEL_INFO_SIZE);
+	PyModule_AddIntMacro(module, VEHICLE_MODEL_INFO_FRONTSEAT);
+	PyModule_AddIntMacro(module, VEHICLE_MODEL_INFO_REARSEAT);
+	PyModule_AddIntMacro(module, VEHICLE_MODEL_INFO_PETROLCAP);
+	PyModule_AddIntMacro(module, VEHICLE_MODEL_INFO_WHEELSFRONT);
+	PyModule_AddIntMacro(module, VEHICLE_MODEL_INFO_WHEELSREAR);
+	PyModule_AddIntMacro(module, VEHICLE_MODEL_INFO_WHEELSMID);
+	PyModule_AddIntMacro(module, VEHICLE_MODEL_INFO_FRONT_BUMPER_Z);
+	PyModule_AddIntMacro(module, VEHICLE_MODEL_INFO_REAR_BUMPER_Z);
+
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_32x32);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_64x32);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_64x64);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_128x32);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_128x64);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_128x128);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_256x32);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_256x64);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_256x128);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_256x256);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_512x64);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_512x128);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_512x256);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_SIZE_512x512);
+	
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_TEXT_ALIGN_LEFT);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_TEXT_ALIGN_CENTER);
+	PyModule_AddIntMacro(module, OBJECT_MATERIAL_TEXT_ALIGN_RIGHT);
 }
 
 void clearTimerData(std::deque<timer_data>::iterator x)

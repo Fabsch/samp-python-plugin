@@ -25,7 +25,9 @@
 #include "constants.h"
 #include "nativefunctions.h"
 #include "pysamp.h"
+#ifndef _WIN32
 #include <dlfcn.h>
+#endif
 
 //----------------------------------------------------------
 

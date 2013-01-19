@@ -352,10 +352,85 @@ PyMethodDef _pySampMethods[] =
 	{ NULL, NULL, 0, NULL }
 };
 
+struct module_state
+{
+        PyObject *error;
+};
+
+#if PY_MAJOR_VERSION >= 3
+        #define GETSTATE(m) ((struct module_state*)PyModule_GetState(m))
+#else
+        #define GETSTATE(m) (&_state)
+        static struct module_state _state;
+#endif
+
+#if PY_MAJOR_VERSION >= 3
+
+static int _pyModuleTraverse(PyObject *m, visitproc visit, void *arg)
+{
+        Py_VISIT(GETSTATE(m)->error);
+        return 0;
+}
+
+static int _pyModuleClear(PyObject *m)
+{
+        Py_CLEAR(GETSTATE(m)->error);
+        return 0;
+}
+
+
+static struct PyModuleDef pysamp_moduledef =
+{
+        PyModuleDef_HEAD_INIT,
+        "samp",
+        NULL,
+        sizeof(struct module_state),
+        _pySampMethods,
+        NULL,
+        _pyModuleTraverse,
+        _pyModuleClear,
+        NULL
+};
+#endif
+
+
+char *_getString(AMX *amx, cell params)
+{
+        char *res;
+        cell *addr;
+
+        int len;
+        amx_GetAddr(amx, params, &addr);
+        amx_StrLen(addr, &len);
+
+        res = new char[++len];
+        amx_GetString(res, addr, 0, len);
+        return res;
+}
+
+
 
 std::deque<PyObject *> m_pyModule;
 bool m_pyInited = false;
 
+
+char *_pyGetString(PyObject *obj)
+{
+	char *retval = NULL;
+	PyObject *strobj = PyObject_Str(obj);
+#if PY_MAJOR_VERSION >= 3
+	PyObject *unival = PyUnicode_AsUTF8String(strobj);
+	if (unival)
+	{
+		retval = strdup(PyBytes_AsString(unival));
+		Py_XDECREF(unival);
+	}
+#else
+	retval = strdup(PyString_AsString(strobj));
+#endif
+	Py_DECREF(strobj);
+	return retval;
+}
 void _pyLogError()
 {
 	// gets exception info and prints it out to the log
@@ -368,9 +443,9 @@ void _pyLogError()
 	// print exception type and (if available) text
 	if (pval != NULL)
 	{
-		PyObject *val = PyObject_Str(pval);
-		logprintf("%s: %s", type->tp_name, PyString_AsString(val));
-		Py_DECREF(val);
+		char *pvalstr = _pyGetString(pval);
+		logprintf("%s: %s", type->tp_name, pvalstr);
+		free(pvalstr);
 	}
 	else logprintf("%s", type->tp_name);
 
@@ -387,11 +462,14 @@ void _pyLogError()
 			{
 				while (tb != NULL)
 				{
-					logprintf("    %s[%d] in %s", PyString_AsString(tb->tb_frame->f_code->co_filename), tb->tb_lineno, PyString_AsString(tb->tb_frame->f_code->co_name));
+					char *fname = _pyGetString(tb->tb_frame->f_code->co_filename), *name = _pyGetString(tb->tb_frame->f_code->co_name), *cline;;
+					logprintf("    %s[%d] in %s", fname, tb->tb_lineno, name);
 					// use getline to get the code line
 					PyObject *codeline = PyObject_CallFunction(lc_getline, "OiO", tb->tb_frame->f_code->co_filename, tb->tb_lineno, tb->tb_frame->f_globals);
-					logprintf("      %s", PyString_AsString(codeline));
+					cline = _pyGetString(codeline);
+					logprintf("      %s", cline);
 					Py_DECREF(codeline);
+					free(fname); free(name); free(cline);
 					tb = tb->tb_next;
 				}
 				Py_DECREF(lc_getline);
@@ -430,7 +508,7 @@ PyObject *_pyCallFunc(PyObject *module, const char *funcname, PyObject *args)
 }
 cell _pyCallAll(const char *funcname, PyObject *args, int nondefval, int defval)
 {
-	PyObject *val = PyInt_FromLong(nondefval); // if one module returns this value, return this
+	PyObject *val = PyLong_FromLong(nondefval); // if one module returns this value, return this
 	PyObject *boolval = PyBool_FromLong(nondefval);
 	bool ret_val = false;
 	for (std::deque<PyObject*>::iterator i = m_pyModule.begin(); i != m_pyModule.end(); i++)
@@ -440,6 +518,7 @@ cell _pyCallAll(const char *funcname, PyObject *args, int nondefval, int defval)
 		if (r == val || r == boolval) ret_val = true;
 		Py_XDECREF(r);
 	}
+	Py_DECREF(val); Py_DECREF(boolval);
 	// DEBUG
 	/*if (funcname[8] != 'U') // avoid OnPlayerUpdate
 		logprintf("PYTHON: callback %s return value %d", funcname, (ret_val ? nondefval : defval));*/
@@ -461,7 +540,11 @@ cell _pyCallAll(const char *funcname, PyObject *args, int nondefval, int defval)
 	m_pyInited = true;
 
 	// init samp modules
+#if PY_MAJOR_VERSION >= 3
+	PyObject *samp_mod = PyModule_Create(&pysamp_moduledef);
+#else
 	PyObject *samp_mod = Py_InitModule("samp", _pySampMethods);
+#endif
 	_pyInitMacros(samp_mod);
 
 	// add the current directory to the module import paths

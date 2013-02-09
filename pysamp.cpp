@@ -394,21 +394,6 @@ static struct PyModuleDef pysamp_moduledef =
 #endif
 
 
-char *_getString(AMX *amx, cell params)
-{
-        char *res;
-        cell *addr;
-
-        int len;
-        amx_GetAddr(amx, params, &addr);
-        amx_StrLen(addr, &len);
-
-        res = new char[++len];
-        amx_GetString(res, addr, 0, len);
-        return res;
-}
-
-
 
 std::deque<PyObject *> m_pyModule;
 bool m_pyInited = false;
@@ -526,6 +511,15 @@ cell _pyCallAll(const char *funcname, PyObject *args, int nondefval, int defval)
 	return (ret_val ? nondefval : defval);
 }
 
+#if PY_MAJOR_VERSION >= 3
+PyMODINIT_FUNC PyInit_samp()
+{
+	PyObject *samp_mod = PyModule_Create(&pysamp_moduledef);
+	_pyInitMacros(samp_mod);
+	return samp_mod;
+}
+#endif
+
 #if ENABLE_MULTITHREAD
 	THREAD_RETURN _pyInit(void *prm)
 #else
@@ -535,17 +529,16 @@ cell _pyCallAll(const char *funcname, PyObject *args, int nondefval, int defval)
 	// prevent other thread to continue until Python is completely initialized
 	m_MainLock->Lock();
 
-	PyEval_InitThreads();
+	PyImport_AppendInittab("samp", PyInit_samp);
 	Py_Initialize();
+	PyEval_InitThreads();
 	m_pyInited = true;
 
 	// init samp modules
-#if PY_MAJOR_VERSION >= 3
-	PyObject *samp_mod = PyModule_Create(&pysamp_moduledef);
-#else
+#if PY_MAJOR_VERSION < 3
 	PyObject *samp_mod = Py_InitModule("samp", _pySampMethods);
-#endif
 	_pyInitMacros(samp_mod);
+#endif
 
 	// add the current directory to the module import paths
 	//	char *curpath = Py_GetPath();

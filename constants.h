@@ -27,6 +27,9 @@
 #define INVALID_GANG_ZONE						-1
 #define INVALID_3DTEXT_ID						0xFFFF
 
+#define TEXT_DRAW_FONT_SPRITE_DRAW				4
+#define TEXT_DRAW_FONT_MODEL_PREVIEW			5
+
 // Dialogs
 #define DIALOG_STYLE_MSGBOX						0
 #define DIALOG_STYLE_INPUT						1
@@ -153,6 +156,7 @@
 #define SPECIAL_ACTION_DRINK_WINE				22
 #define SPECIAL_ACTION_DRINK_SPRUNK				23
 #define SPECIAL_ACTION_CUFFED					24
+#define SPECIAL_ACTION_CARRY					25
 
 // player camera
 #define CAMERA_CUT								2

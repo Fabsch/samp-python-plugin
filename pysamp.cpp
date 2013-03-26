@@ -88,6 +88,7 @@ PyMethodDef _pySampMethods[] =
 	{ "EditAttachedObject", sEditAttachedObject, METH_VARARGS, "" },
 	{ "EnableStuntBonusForAll", sEnableStuntBonusForAll, METH_VARARGS, "Enables/disables stunt bonus for everyone" },
 	{ "EnableStuntBonusForPlayer", sEnableStuntBonusForPlayer, METH_VARARGS, "Enables/disables stunt bonus for a player" },
+	{ "EnableVehicleFriendlyFire", sEnableVehicleFriendlyFire, METH_VARARGS, "" },
 	{ "ForeClassSelection", sForceClassSelection, METH_VARARGS, "Forces a player to the class selection after the next death" },
 
 	{ "GameModeExit", sGameModeExit, METH_VARARGS, "Exits the current gamemode" },
@@ -222,6 +223,9 @@ PyMethodDef _pySampMethods[] =
 	{ "PlayerTextDrawFont", sPlayerTextDrawFont, METH_VARARGS, "" },
 	{ "PlayerTextDrawSetProportional", sPlayerTextDrawSetProportional, METH_VARARGS, "" },
 	{ "PlayerTextDrawSetSelectable", sPlayerTextDrawSetSelectable, METH_VARARGS, "" },
+	{ "PlayerTextDrawSetPreviewModel", sPlayerTextDrawSetPreviewModel, METH_VARARGS, "" },
+	{ "PlayerTextDrawSetPreviewRot", sPlayerTextDrawSetPreviewRot, METH_VARARGS, "" },
+	{ "PlayerTextDrawSetPreviewVehCol", sPlayerTextDrawSetPreviewVehCol, METH_VARARGS, "" },
 	{ "PlayerTextDrawShow", sPlayerTextDrawShow, METH_VARARGS, "" },
 	{ "PlayerTextDrawHide", sPlayerTextDrawHide, METH_VARARGS, "" },
 	{ "PlayerTextDrawSetString", sPlayerTextDrawSetString, METH_VARARGS, "" },
@@ -332,6 +336,9 @@ PyMethodDef _pySampMethods[] =
 	{ "TextDrawSetSelectable", sTextDrawSetSelectable, METH_VARARGS, "" },
 	{ "TextDrawSetShadow", sTextDrawSetShadow, METH_VARARGS, "" },
 	{ "TextDrawSetString", sTextDrawSetString, METH_VARARGS, "" },
+	{ "TextDrawSetPreviewModel", sTextDrawSetPreviewModel, METH_VARARGS, "" },
+	{ "TextDrawSetPreviewRot", sTextDrawSetPreviewRot, METH_VARARGS, "" },
+	{ "TextDrawSetPreviewVehCol", sTextDrawSetPreviewVehCol, METH_VARARGS, "" },
 	{ "TextDrawShowForAll", sTextDrawShowForAll, METH_VARARGS, "" },
 	{ "TextDrawShowForPlayer", sTextDrawShowForPlayer, METH_VARARGS, "" },
 	{ "TextDrawTextSize", sTextDrawTextSize, METH_VARARGS, "" },
@@ -649,6 +656,9 @@ void _pyInitMacros(PyObject *module)
 	PyModule_AddIntMacro(module, INVALID_GANG_ZONE);
 	PyModule_AddIntMacro(module, INVALID_3DTEXT_ID);
 
+	PyModule_AddIntMacro(module, TEXT_DRAW_FONT_SPRITE_DRAW);
+	PyModule_AddIntMacro(module, TEXT_DRAW_FONT_MODEL_PREVIEW);
+
 	PyModule_AddIntMacro(module, DIALOG_STYLE_INPUT);
 	PyModule_AddIntMacro(module, DIALOG_STYLE_LIST);
 	PyModule_AddIntMacro(module, DIALOG_STYLE_MSGBOX);
@@ -767,6 +777,7 @@ void _pyInitMacros(PyObject *module)
 	PyModule_AddIntMacro(module, SPECIAL_ACTION_DRINK_WINE);
 	PyModule_AddIntMacro(module, SPECIAL_ACTION_DRINK_SPRUNK);
 	PyModule_AddIntMacro(module, SPECIAL_ACTION_CUFFED);
+	PyModule_AddIntMacro(module, SPECIAL_ACTION_CARRY);
 
 	PyModule_AddIntMacro(module, CAMERA_CUT);
 	PyModule_AddIntMacro(module, CAMERA_MOVE);

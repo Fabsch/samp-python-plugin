@@ -107,6 +107,7 @@ void _initAMX(AMX *amx)
 	_editAttachedObject				= _findNative(amx, "EditAttachedObject");
 	_enableStuntBonusForAll			= _findNative(amx, "EnableStuntBonusForAll");
 	_enableStuntBonusForPlayer		= _findNative(amx, "EnableStuntBonusForPlayer");
+	_enableVehicleFriendlyFire		= _findNative(amx, "EnableVehicleFriendlyFire");
 	_forceClassSelection			= _findNative(amx, "ForceClassSelection");
 
 	_gameModeExit					= _findNative(amx, "GameModeExit");
@@ -239,6 +240,9 @@ void _initAMX(AMX *amx)
 	_playerTextDrawSetOutline		= _findNative(amx, "PlayerTextDrawSetOutline");
 	_playerTextDrawBackgroundColor	= _findNative(amx, "PlayerTextDrawBackgroundColor");
 	_playerTextDrawFont				= _findNative(amx, "PlayerTextDrawFont");
+	_playerTextDrawSetPreviewModel	= _findNative(amx, "PlayerTextDrawSetPreviewModel");
+	_playerTextDrawSetPreviewRot	= _findNative(amx, "PlayerTextDrawSetPreviewRot");
+	_playerTextDrawSetPreviewVehCol	= _findNative(amx, "PlayerTextDrawSetPreviewVehCol");
 	_playerTextDrawSetProportional	= _findNative(amx, "PlayerTextDrawSetProportional");
 	_playerTextDrawSetSelectable	= _findNative(amx, "PlayerTextDrawSetSelectable");
 	_playerTextDrawShow				= _findNative(amx, "PlayerTextDrawShow");
@@ -347,8 +351,11 @@ void _initAMX(AMX *amx)
 	_textDrawHideForPlayer			= _findNative(amx, "TextDrawHideForPlayer");
 	_textDrawLetterSize				= _findNative(amx, "TextDrawLetterSize");
 	_textDrawSetOutline				= _findNative(amx, "TextDrawSetOutline");
+	_textDrawSetPreviewModel		= _findNative(amx, "TextDrawSetPreviewModel");
+	_textDrawSetPreviewRot			= _findNative(amx, "TextDrawSetPreviewRot");
+	_textDrawSetPreviewVehCol		= _findNative(amx, "TextDrawSetPreviewVehCol");
 	_textDrawSetProportional		= _findNative(amx, "TextDrawSetProportional");
-	_textDrawSetSelectable		= _findNative(amx, "TextDrawSetSelectable");
+	_textDrawSetSelectable			= _findNative(amx, "TextDrawSetSelectable");
 	_textDrawSetShadow				= _findNative(amx, "TextDrawSetShadow");
 	_textDrawSetString				= _findNative(amx, "TextDrawSetString");
 	_textDrawShowForAll				= _findNative(amx, "TextDrawShowForAll");
@@ -430,6 +437,7 @@ amx_function_t _editPlayerObject;
 amx_function_t _editAttachedObject;
 amx_function_t _enableStuntBonusForAll;
 amx_function_t _enableStuntBonusForPlayer;
+amx_function_t _enableVehicleFriendlyFire;
 amx_function_t _forceClassSelection;
 
 amx_function_t _gameModeExit;
@@ -562,6 +570,9 @@ amx_function_t _playerTextDrawSetShadow;
 amx_function_t _playerTextDrawSetOutline;
 amx_function_t _playerTextDrawBackgroundColor;
 amx_function_t _playerTextDrawFont;
+amx_function_t _playerTextDrawSetPreviewModel;
+amx_function_t _playerTextDrawSetPreviewRot;
+amx_function_t _playerTextDrawSetPreviewVehCol;
 amx_function_t _playerTextDrawSetProportional;
 amx_function_t _playerTextDrawSetSelectable;
 amx_function_t _playerTextDrawShow;
@@ -670,6 +681,9 @@ amx_function_t _textDrawHideForAll;
 amx_function_t _textDrawHideForPlayer;
 amx_function_t _textDrawLetterSize;
 amx_function_t _textDrawSetOutline;
+amx_function_t _textDrawSetPreviewModel;
+amx_function_t _textDrawSetPreviewRot;
+amx_function_t _textDrawSetPreviewVehCol;
 amx_function_t _textDrawSetProportional;
 amx_function_t _textDrawSetSelectable;
 amx_function_t _textDrawSetShadow;
@@ -1370,6 +1384,13 @@ PyObject *sEnableStuntBonusForPlayer(PyObject *self, PyObject *args)
 
 	cell amxargs[3] = { 2 * sizeof(cell), playerid, enable };
 	_enableStuntBonusForPlayer(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// EnableVehicleFriendlyFire() -- TODO: test
+PyObject *sEnableVehicleFriendlyFire(PyObject *self, PyObject *args)
+{
+	cell amxargs[1] = { 0 };
+	_enableVehicleFriendlyFire(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
 // EnableZoneNames -- removed
@@ -2880,6 +2901,38 @@ PyObject *sPlayerTextDrawBoxColor(PyObject *self, PyObject *args)
 
 	Py_RETURN_NONE;
 }
+// PlayerTextDrawSetPreviewModel(playerid, PlayerText:text, modelindex) -- TODO: test
+PyObject *sPlayerTextDrawSetPreviewModel(PyObject *self, PyObject *args)
+{
+	int pid, txt, midx;
+	PyArg_ParseTuple(args, "iii", &pid, &txt, &midx);
+
+	cell amxargs[4] = { 3 * sizeof(cell), pid, txt, midx };
+	_playerTextDrawSetPreviewModel(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawSetPreviewRot(playerid, PlayerText:text, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fZoom) -- TODO: test
+PyObject *sPlayerTextDrawSetPreviewRot(PyObject *self, PyObject *args)
+{
+	int pid, txt;
+	float x, y, z, zoom;
+	PyArg_ParseTuple(args, "iiffff", &pid, &txt, &x, &y, &z, &zoom);
+	
+	cell amxargs[7] = { 6 * sizeof(cell), pid, txt, amx_ftoc(x), amx_ftoc(y), amx_ftoc(z), amx_ftoc(zoom) };
+
+	_playerTextDrawSetPreviewRot(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// PlayerTextDrawSetPreviewVehCol(PlayerText:text, playerid, color1, color2) -- TODO: test
+PyObject *sPlayerTextDrawSetPreviewVehCol(PyObject *self, PyObject *args)
+{
+	int txt, pid, c1, c2;
+	PyArg_ParseTuple(args, "iiii", &txt, &pid, &c1, &c2);
+
+	cell amxargs[5] = { 4 * sizeof(cell), vid, pid, obj, doors };
+	_playerTextDrawSetPreviewVehCol(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
 // PlayerTextDrawSetShadow(playerid, PlayerText:text, size) -- TODO: test
 PyObject *sPlayerTextDrawSetShadow(PyObject *self, PyObject *args)
 {
@@ -4261,6 +4314,37 @@ PyObject *sTextDrawSetOutline(PyObject *self, PyObject *args)
 	_textDrawSetOutline(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
+// TextDrawSetPreviewModel(Text:text, modelindex) -- TODO: test
+PyObject *sTextDrawSetPreviewModel(PyObject *self, PyObject *args)
+{
+	int txt, midx;
+	PyArg_ParseTuple(args, "ii", &txt, &midx);
+
+	cell amxargs[3] = { 2 * sizeof(cell), txt, midx };
+	_textDrawSetPreviewModel(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// TextDrawSetPreviewRot(Text:text, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fZoom) -- TODO: test
+PyObject *sTextDrawSetPreviewRot(PyObject *self, PyObject *args)
+{
+	int txt;
+	float x, y, z, zoom;
+	PyArg_ParseTuple(args, "iffff", &txt, &x, &y, &z, &zoom);
+
+	cell amxargs[6] = { 5 * sizeof(cell), txt, amx_ftoc(x), amx_ftoc(y), amx_ftoc(z), amx_ftoc(zoom) };
+	_textDrawSetPreviewRot(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
+// TextDrawSetPreviewVehCol(Text:text, color1, color2) -- TODO: test
+PyObject *sTextDrawSetPreviewVehCol(PyObject *self, PyObject *args)
+{
+	int txt, color1, color2;
+	PyArg_ParseTuple(args, "iii", &txt, &color1, &color2);
+
+	cell amxargs[4] = { 3 * sizeof(cell), txt, color1, color2 };
+	_textDrawSetPreviewVehCol(m_AMX, amxargs);
+	Py_RETURN_NONE;
+}
 // TextDrawSetProportional(Text:text, set) -- TODO: test
 PyObject *sTextDrawSetProportional(PyObject *self, PyObject *args)
 {
@@ -4887,6 +4971,7 @@ cell AMX_NATIVE_CALL n_OnRconCommand(AMX *amx, cell *params)
 	PyEnsureGIL;
 	PyObject *o = Py_BuildValue("s", cmd);
 	int ret = _pyCallAll("OnRconCommand", o);
+	printf("object refcount %d", o->ob_refcnt);
 	Py_DECREF(o);
 	PyReleaseGIL;
 	

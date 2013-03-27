@@ -454,7 +454,7 @@ void _pyLogError()
 			{
 				while (tb != NULL)
 				{
-					char *fname = _pyGetString(tb->tb_frame->f_code->co_filename), *name = _pyGetString(tb->tb_frame->f_code->co_name), *cline;;
+					char *fname = _pyGetString(tb->tb_frame->f_code->co_filename), *name = _pyGetString(tb->tb_frame->f_code->co_name), *cline;
 					logprintf("    %s[%d] in %s", fname, tb->tb_lineno, name);
 					// use getline to get the code line
 					PyObject *codeline = PyObject_CallFunction(lc_getline, "OiO", tb->tb_frame->f_code->co_filename, tb->tb_lineno, tb->tb_frame->f_globals);
@@ -536,7 +536,9 @@ PyMODINIT_FUNC PyInit_samp()
 	// prevent other thread to continue until Python is completely initialized
 	m_MainLock->Lock();
 
+#if PY_MAJOR_VERSION >= 3
 	PyImport_AppendInittab("samp", PyInit_samp);
+#endif
 	Py_Initialize();
 	PyEval_InitThreads();
 	m_pyInited = true;

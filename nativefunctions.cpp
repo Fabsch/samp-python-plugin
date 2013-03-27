@@ -2929,7 +2929,7 @@ PyObject *sPlayerTextDrawSetPreviewVehCol(PyObject *self, PyObject *args)
 	int txt, pid, c1, c2;
 	PyArg_ParseTuple(args, "iiii", &txt, &pid, &c1, &c2);
 
-	cell amxargs[5] = { 4 * sizeof(cell), vid, pid, obj, doors };
+	cell amxargs[5] = { 4 * sizeof(cell), txt, pid, c1, c2 };
 	_playerTextDrawSetPreviewVehCol(m_AMX, amxargs);
 	Py_RETURN_NONE;
 }
@@ -4971,7 +4971,6 @@ cell AMX_NATIVE_CALL n_OnRconCommand(AMX *amx, cell *params)
 	PyEnsureGIL;
 	PyObject *o = Py_BuildValue("s", cmd);
 	int ret = _pyCallAll("OnRconCommand", o);
-	printf("object refcount %d", o->ob_refcnt);
 	Py_DECREF(o);
 	PyReleaseGIL;
 	

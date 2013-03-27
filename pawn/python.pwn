@@ -313,6 +313,7 @@ public _unusedFunc()
 	EditAttachedObject(0, 0);
 	EnableStuntBonusForAll(0);
 	EnableStuntBonusForPlayer(0, 0);
+	EnableVehicleFriendlyFire();
 	ForceClassSelection(0);
 	GameModeExit();
 	GameTextForAll("", 0, 0);
@@ -437,6 +438,9 @@ public _unusedFunc()
 	PlayerTextDrawSetOutline(0, PlayerText:0, 0);
 	PlayerTextDrawBackgroundColor(0, PlayerText:0, 0);
 	PlayerTextDrawFont(0, PlayerText:0, 0);
+	PlayerTextDrawSetPreviewModel(0, PlayerText:0, 0);
+	PlayerTextDrawSetPreviewRot(0, PlayerText:0, 0.0, 0.0, 0.0);
+	PlayerTextDrawSetPreviewVehCol(0, PlayerText:0, 0, 0);
 	PlayerTextDrawSetProportional(0, PlayerText:0, 0);
 	PlayerTextDrawSetSelectable(0, PlayerText:0, 0);
 	PlayerTextDrawShow(0, PlayerText:0);
@@ -543,6 +547,9 @@ public _unusedFunc()
 	TextDrawLetterSize(Text:0, 0.0, 0.0);
 	TextDrawSetSelectable(Text:0, 0);
 	TextDrawSetOutline(Text:0, 0);
+	TextDrawSetPreviewModel(Text:0, 0);
+	TextDrawSetPreviewRot(Text:0, 0.0, 0.0, 0.0);
+	TextDrawSetPreviewVehCol(Text:0, 0, 0);
 	TextDrawSetProportional(Text:0, 0);
 	TextDrawSetShadow(Text:0, 0);
 	TextDrawSetString(Text:0, "");
